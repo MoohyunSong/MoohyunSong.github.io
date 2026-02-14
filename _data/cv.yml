@@ -9,13 +9,35 @@
 - title: Education
   type: time_table
   contents:
-    - title: Ph.D. Student
+    - title: Ph.D. Student in Artificial Intelligence
       institution: Hanyang University, Seoul, South Korea
       year: 2026 -
-      description:
     - title: B.S. in Computer Science
       institution: Kookmin University, Seoul, South Korea
       year: 2020 - 2026
+      description:
+        - "Including 2 years of military service (ROKAF, 2021-2023)"
+
+- title: Experience
+  type: time_table
+  contents:
+    - title: Research Intern
+      institution: ETRI (Electronics and Telecommunications Research Institute), Daejeon, South Korea
+      year: 2025
+      description:
+        - "Built distributed training and MLOps environments in containerized (Kubernetes) infrastructure managing 100+ GPU clusters"
+        - "Researched efficient LLM training utilizing Data Parallelism and Fully Sharded Data Parallel (FSDP) techniques"
+        - "Conducted research on efficient LLM fine-tuning using LoRA/QLoRA methods and quantization techniques"
+
+- title: Teaching Experience
+  type: time_table
+  contents:
+    - title: Teaching Assistant
+      institution: Samsung Electronics
+      year: 2025
+      description:
+        - "Assisted a professor in teaching the Software Architect - Cloud Computing course to 83 Samsung developers"
+        - "Course topics included AWS Cloud, Kubernetes, and Serverless Computing"
 
 - title: Honors and Awards
   type: time_table
@@ -29,18 +51,12 @@
     - year: 2023
       items:
         - "AWS Rookie Championship 2023 - AWS JAM 1st Place, AWS Korea"
-        - "Commander's Commendation, ROK Air Force Air & Missile Defense Command"
-    - year: 2022
-      items:
-        - "4th ROK Air Force Creative Innovation Idea Hackathon 3rd Place"
     - year: 2020
       items:
         - "Industrial Service Medal (산업포장), Republic of Korea"
     - year: 2019
       items:
         - "Medallion for Excellence (Cloud Computing, 4th Place), WorldSkills Kazan 2019"
-        - "Bronze Medal, WorldSkills India International Cloud Computing Challenge 2019"
     - year: 2018
       items:
-        - "Bronze Medal (IT Network System Administration), WorldSkills Asia 2018"
         - "Silver Medal (IT Network System Administration), 53rd WorldSkills Korea National Competition"

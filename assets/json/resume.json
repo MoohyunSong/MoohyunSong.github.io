@@ -29,6 +29,7 @@
       "institution": "Hanyang University, Seoul, South Korea",
       "location": "Seoul, South Korea",
       "url": "https://www.hanyang.ac.kr/",
+      "area": "Artificial Intelligence",
       "studyType": "Ph.D.",
       "startDate": "2026-03-01"
     },
@@ -59,19 +60,7 @@
       "date": "2023-12-01",
       "awarder": "AWS Korea"
     },
-    {
-      "title": "Commander's Commendation",
-      "date": "2023-01-01",
-      "awarder": "ROK Air Force Air & Missile Defense Command",
-      "summary": "For critical contributions in leading the design and development of missile defense mission analytics and visualization systems"
-    },
-    {
-      "title": "4th ROK Air Force Creative Innovation Idea Hackathon 3rd Place",
-      "date": "2022-10-01",
-      "awarder": "ROK Air Force",
-      "summary": "Project: AI/Big Data-powered Missile Defense Operations Analysis Platform"
-    },
-    {
+{
       "title": "Industrial Service Medal",
       "date": "2020-08-01",
       "awarder": "Republic of Korea"
@@ -81,20 +70,25 @@
       "date": "2019-08-01",
       "awarder": "WorldSkills Kazan 2019"
     },
-    {
-      "title": "Bronze Medal (Cloud Computing)",
-      "date": "2019-07-01",
-      "awarder": "WorldSkills India International Cloud Computing Challenge 2019"
-    },
-    {
-      "title": "Bronze Medal (IT Network System Administration)",
-      "date": "2018-11-01",
-      "awarder": "WorldSkills Asia 2018"
-    },
-    {
+{
       "title": "Silver Medal (IT Network System Administration)",
       "date": "2018-10-01",
       "awarder": "53rd WorldSkills Korea National Competition"
+    }
+  ],
+  "work": [
+    {
+      "name": "ETRI (Electronics and Telecommunications Research Institute)",
+      "position": "Research Intern",
+      "location": "Daejeon, South Korea",
+      "startDate": "2025-07-01",
+      "endDate": "2025-08-31",
+      "summary": "Supercomputing System Research Section",
+      "highlights": [
+        "Built distributed training and MLOps environments in containerized (Kubernetes) infrastructure managing 100+ GPU clusters",
+        "Researched efficient LLM training utilizing Data Parallelism and Fully Sharded Data Parallel (FSDP) techniques",
+        "Conducted research on efficient LLM fine-tuning using LoRA/QLoRA methods and quantization techniques"
+      ]
     }
   ],
   "skills": [],
@@ -106,7 +100,7 @@
     },
     {
       "language": "English",
-      "fluency": "Fluent",
+      "fluency": "Working proficiency",
       "icon": ""
     }
   ],
