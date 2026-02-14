@@ -9,6 +9,8 @@ nav_order: 2
 
 <!-- _pages/publications.md -->
 
+**10 publications** (4 international conferences, 1 domestic journal, 5 domestic conferences)
+
 {% include bib_search.liquid %}
 
 <!-- ## International Journal
