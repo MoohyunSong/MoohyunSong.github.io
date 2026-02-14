@@ -46,33 +46,33 @@
   "awards": [
     {
       "title": "Best Paper Award",
-      "date": "2025-07-01",
+      "date": "2025-07",
       "awarder": "Korean Institute of Information Scientists and Engineers (KIISE)",
       "summary": "Received the Best Paper Award as the first author at the KCC2025 Conference. Paper: \"Callisto: Cost-Efficient AI Development Platform Using Spot Instances\""
     },
     {
       "title": "AWS Summit Seoul 2024 GameDay - Generative AI 2nd Place (Round 2)",
-      "date": "2024-05-01",
+      "date": "2024-05",
       "awarder": "AWS Korea"
     },
     {
       "title": "AWS Rookie Championship 2023 - AWS JAM 1st Place",
-      "date": "2023-12-01",
+      "date": "2023-12",
       "awarder": "AWS Korea"
     },
-{
+    {
       "title": "Industrial Service Medal",
-      "date": "2020-08-01",
+      "date": "2020-08",
       "awarder": "Republic of Korea"
     },
     {
       "title": "Medallion for Excellence (Cloud Computing, 4th Place)",
-      "date": "2019-08-01",
+      "date": "2019-08",
       "awarder": "WorldSkills Kazan 2019"
     },
-{
+    {
       "title": "Silver Medal (IT Network System Administration)",
-      "date": "2018-10-01",
+      "date": "2018-10",
       "awarder": "53rd WorldSkills Korea National Competition"
     }
   ],
