@@ -11,11 +11,11 @@ nav_order: 2
 
 {% include bib_search.liquid %}
 
-## International Journal
+<!-- ## International Journal
 
 <div class="publications">
 {% bibliography --query @article[keywords=international] %}
-</div>
+</div> -->
 
 ## International Conference
 

@@ -39,6 +39,28 @@
         - "Assisted a professor in teaching the Software Architect - Cloud Computing course to 83 Samsung developers"
         - "Course topics included AWS Cloud, Kubernetes, and Serverless Computing"
 
+- title: Publications
+  type: time_table
+  contents:
+    - year: 2026
+      items:
+        - "M. Song, H. Kim, K. Lee, J. G. Son, and K. Lee, \"Orchestrating WASM-based MCP Tool Runtimes for AI Agents across Edge-Cloud Continuum,\" in Proc. CCGrid '26 (To appear)"
+    - year: 2025
+      items:
+        - "S. Kang, M. Song, T. Kim, S. Lee, J. Han, H. Kim, and K. Lee, \"HybridServe: Adaptive WebAssembly-Container Runtime Selection for Edge Serverless Computing,\" in Proc. WoSC11 '25, pp. 1-6"
+        - "S. Cheon, K. Kim, K. Kim, M. Song, and K. Lee, \"Multi-Node Spot Instances Availability Score Collection System,\" in Proc. HPDC '25"
+        - "M. Song, T. Kim, K. Kim, and K. Lee, \"Callisto: Cost-Efficient AI Development Platform Using Spot Instances,\" in Proc. KCC '25, pp. 617-619"
+        - "M. Song, W. Park, Y. Bae, J. Kim, D. Kim, and J. Kim, \"CostNorm: LLM-based Cloud Cost Optimization AI Agent,\" in Annual Conference of KIPS '25, pp. 56-57"
+    - year: 2024
+      items:
+        - "M. Song, S. Cheon, K. Kim, Y. Kim, J. Moon, and J. Park, \"Machine Learning Pipeline Deployment Platform Considering Optimal Performance and Cost,\" in Proc. KCC '24, pp. 621-623"
+    - year: 2023
+      items:
+        - "M. Song, Y. Hur, and K. Lee, \"When Serverless Computing Meets Different Degrees of Customization for DNN Inference,\" in Proc. WoSC '23, pp. 42-47"
+        - "M. Song, K. Kim, J. Moon, Y. Kim, C. Nam, J. Park, and K. Lee, \"KubEVC-Agent: Kubernetes Edge Vision Cluster Agent for Optimal DNN Inference and Operation,\" IEMEK J. Embedded Syst. Appl., vol. 18, no. 6, pp. 293-301"
+        - "J. Hwang, M. Song, J. Lim, and K. Lee, \"Optimize Spot Instance Live Migration Using Network Storage in Cloud-Native Environment,\" in Proc. KCC '23, pp. 1323-1325"
+        - "M. Song, J. Choi, and K. Lee, \"Open-Source Automated Software for Deploying Kubernetes Machine Learning Environment,\" in Proc. KCC '23, pp. 435-437"
+
 - title: Honors and Awards
   type: time_table
   contents:
