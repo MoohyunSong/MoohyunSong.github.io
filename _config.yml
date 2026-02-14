@@ -222,23 +222,13 @@ kramdown:
 include: ["_pages"]
 exclude:
   - bin/
-  - CONTRIBUTING.md
-  - CUSTOMIZE.md
-  - Dockerfile
-  - docker-compose.yml
-  - docker-compose-slim.yml
-  - FAQ.md
   - Gemfile
   - Gemfile.lock
-  - INSTALL.md
   - LICENSE
-  - lighthouse_results/
   - package.json
   - package-lock.json
-  - _pages/about_einstein.md
   - purgecss.config.js
   - README.md
-  - readme_preview/
   - vendor
 keep_files:
   - CNAME
@@ -623,20 +613,8 @@ third_party_libraries:
 # Get external JSON data
 # -----------------------------------------------------------------------------
 
-jekyll_get_json:
-  - data: resume
-    json: assets/json/resume.json # it can also be an url
-# jsonresume disabled to use _data/cv.yml instead (supports custom sections like Publications, Teaching)
-# jsonresume:
-#   - basics
-#   - work
-#   - education
-#   - publications
-#   - projects
-#   - volunteer
-#   - awards
-#   - certificates
-#   - skills
-#   - languages
-#   - interests
-#   - references
+# jekyll_get_json and jsonresume disabled to use _data/cv.yml instead
+# (supports custom sections like Publications, Teaching)
+# jekyll_get_json:
+#   - data: resume
+#     json: assets/json/resume.json
