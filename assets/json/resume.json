@@ -30,7 +30,16 @@
       "location": "Seoul, South Korea",
       "url": "https://www.hanyang.ac.kr/",
       "studyType": "Ph.D.",
-      "startDate": "2025-03-01"
+      "startDate": "2026-03-01"
+    },
+    {
+      "institution": "Kookmin University, Seoul, South Korea",
+      "location": "Seoul, South Korea",
+      "url": "https://www.kookmin.ac.kr/",
+      "area": "Computer Science",
+      "studyType": "B.S.",
+      "startDate": "2020-03-01",
+      "endDate": "2026-02-01"
     }
   ],
   "awards": [
@@ -76,6 +85,11 @@
       "title": "Bronze Medal (Cloud Computing)",
       "date": "2019-07-01",
       "awarder": "WorldSkills India International Cloud Computing Challenge 2019"
+    },
+    {
+      "title": "Bronze Medal (IT Network System Administration)",
+      "date": "2018-11-01",
+      "awarder": "WorldSkills Asia 2018"
     },
     {
       "title": "Silver Medal (IT Network System Administration)",

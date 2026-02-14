@@ -13,10 +13,9 @@
       institution: Hanyang University, Seoul, South Korea
       year: 2026 -
       description:
-    - title: (To be filled)
-      institution: (Add your Bachelor's / Master's degree here)
-      year:
-      description:
+    - title: B.S. in Computer Science
+      institution: Kookmin University, Seoul, South Korea
+      year: 2020 - 2026
 
 - title: Honors and Awards
   type: time_table
@@ -43,4 +42,5 @@
         - "Bronze Medal, WorldSkills India International Cloud Computing Challenge 2019"
     - year: 2018
       items:
+        - "Bronze Medal (IT Network System Administration), WorldSkills Asia 2018"
         - "Silver Medal (IT Network System Administration), 53rd WorldSkills Korea National Competition"
