@@ -17,6 +17,6 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I am a Ph.D. student in Artificial Intelligence at [Hanyang University](https://www.hanyang.ac.kr/). I received my B.S. in Software from [Kookmin University](https://www.kookmin.ac.kr/).
+I am a Ph.D. student in Artificial Intelligence at [Hanyang University](https://www.hanyang.ac.kr/). I received my B.S.E. in Computer Science from [Kookmin University](https://www.kookmin.ac.kr/).
 
 My research interests include **Distributed Systems**, **Cloud Computing**, and **AI Platform**.
