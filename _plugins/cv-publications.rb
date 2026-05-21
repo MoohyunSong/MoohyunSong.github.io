@@ -21,7 +21,7 @@ module Jekyll
       path = File.join(site.source, source, file)
       return unless File.exist?(path)
 
-      contents = build_contents(File.read(path))
+      contents = build_contents(File.read(path), Array(scholar["last_name"]), Array(scholar["first_name"]))
       return if contents.empty?
 
       section = Array(site.data["cv"]).find do |s|
@@ -31,7 +31,11 @@ module Jekyll
     end
 
     # Returns [{ "year" => Int, "items" => [String, ...] }, ...] for the CV.
-    def build_contents(raw)
+    # last_names/first_names identify the site owner so their name can be
+    # emphasized (bold + underline) within each author list.
+    def build_contents(raw, last_names = [], first_names = [])
+      @my_last_names = last_names.map { |x| x.to_s.strip }
+      @my_first_names = first_names.map { |x| x.to_s.strip }
       by_year = {}
       raw.scan(/^@(\w+)\s*\{(.*?)(?=^@\w|\z)/m) do |type, body|
         type = type.downcase
@@ -115,8 +119,20 @@ module Jekyll
         last = toks.pop
         given = toks.join(" ")
       end
-      initials = given.to_s.strip.split(/\s+/).map { |g| "#{g[0]}." }.join(" ")
-      [initials, last.to_s.strip].reject { |x| x.empty? }.join(" ")
+      last = last.to_s.strip
+      given = given.to_s.strip
+      initials = given.split(/\s+/).map { |g| "#{g[0]}." }.join(" ")
+      formatted = [initials, last].reject(&:empty?).join(" ")
+      mine?(last, given) ? "<u><strong>#{formatted}</strong></u>" : formatted
+    end
+
+    # True when the author is the site owner, matched against the scholar
+    # last_name / first_name config (first name or its initial).
+    def mine?(last, given)
+      return false unless Array(@my_last_names).any? { |l| l.casecmp?(last) }
+      token = given.to_s.split(/\s+/).first.to_s
+      return false if token.empty?
+      Array(@my_first_names).any? { |f| f.casecmp?(token) || f.casecmp?("#{token[0]}.") }
     end
 
     def present?(value)
