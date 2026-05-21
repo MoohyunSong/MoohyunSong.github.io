@@ -18,7 +18,7 @@ Caveat: the workflow only triggers on changes to `assets/**`, `**.bib`, `**.html
 
 ## Adding a publication
 
-Add a BibTeX entry to `_bibliography/papers.bib`. Nothing else needs editing — the section it lands in and the header count are both derived from the entry.
+Add a BibTeX entry to `_bibliography/papers.bib`. Nothing else needs editing — the section it lands in, the header count, and the CV publication list are all derived from the entry.
 
 - Type: `@inproceedings` for conferences, `@article` for journals.
 - Citation key convention: `{lastname}{year}{shortname}`, e.g. `song2026mcptool`.
@@ -53,11 +53,23 @@ The "**N publications** (...)" line in `_pages/publications.md` is generated, no
 
 It counts only `@article` / `@inproceedings` entries tagged `international` / `domestic`, so the header always matches what the page actually renders. Logic can be sanity-checked without a full build via a plain-Ruby harness that stubs `Jekyll::Generator` and calls `generate` on a fake site.
 
+## CV publications (automatic)
+
+The CV's **Publications** section is generated from `papers.bib`, not hand-written. In `_data/cv.yml` that section is just `contents: []`; `_plugins/cv-publications.rb` fills it at build time, grouped by year (descending). Add papers to `papers.bib`, never to `cv.yml`.
+
+Citation format is derived from existing bib fields only (per design choice — no extra fields):
+
+- Authors → initials + last name, Oxford comma (`Song, Moohyun` → `M. Song`; equal-contribution `*` stripped).
+- Venue: `Proc. {series}` if `series` is set; else `Proc. {ABBR} '{yy}` if the `booktitle` ends with a parenthesized abbreviation like `(KCC)`; else the full `booktitle`. `@article` uses the full `journal` name + `vol./no./pp.`
+- The title links to `html` / `url` / `doi` when present.
+
+So a venue with no `series` and no `(ABBR)` in its `booktitle` renders with its full name. Counts and CV both parse `papers.bib` independently, so they always agree.
+
 ## Key files
 
 - `_pages/about.md` — landing page: intro, affiliations (incl. DDPS Lab link `https://ddps.cloud`), profile sidebar.
 - `_pages/publications.md` — publications list: auto count header + sections queried by keyword.
 - `_bibliography/papers.bib` — every publication.
-- `_data/cv.yml` — CV / resume content.
+- `_data/cv.yml` — CV / resume content (the Publications section is auto-filled from `papers.bib`).
 - `_config.yml` — site + jekyll-scholar config (`scholar.source`, `scholar.bibliography`).
-- `_plugins/` — custom Ruby plugins (publication counts, scholar citation badges, etc.).
+- `_plugins/` — custom Ruby plugins (publication counts, CV publications, scholar citation badges, etc.).
