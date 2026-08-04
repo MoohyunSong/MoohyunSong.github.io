@@ -36,7 +36,20 @@ export function Vitae() {
             {sec.items.map((item) => (
               <div key={item.title + item.date} className="flex flex-col gap-0.5">
                 <div className="flex items-baseline justify-between gap-4">
-                  <span className="text-[15px] font-bold">{item.title}</span>
+                  <span className="text-[15px] font-bold">
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="transition-colors hover:text-primary"
+                      >
+                        {item.title} ↗
+                      </a>
+                    ) : (
+                      item.title
+                    )}
+                  </span>
                   <span className="text-[11.5px] font-medium whitespace-nowrap text-muted-foreground">
                     {item.date}
                   </span>

@@ -59,6 +59,8 @@ export interface CvItem {
   title: string
   sub: string
   note?: string
+  /** External link; when set, the item title becomes a hyperlink. */
+  href?: string
   /** Substring of `sub` to render emphasized (used for the owner's name in citations). */
   highlight?: string
 }
@@ -121,37 +123,45 @@ export const CV_SECTIONS: CvSection[] = [
         date: "Jul. 2025",
         title: "Best Paper Award",
         sub: "KIISE Korea Computer Congress 2025 (KCC 2025)",
+        note: "Received as first author for \"Callisto: Cost-Efficient AI Development Platform Using Spot Instances\" at KIISE KCC 2025.",
       },
       {
         date: "May 2024",
         title: "AWS Summit Seoul 2024 GameDay — Generative AI, 2nd Place (Round 2)",
         sub: "AWS Korea",
+        href: "https://aws.amazon.com/ko/blogs/korea/aws-summit-seoul-2024-genai-gameday-winners/",
+        note: "Team-based AWS competition building and operating generative AI services under live challenge scenarios; placed 2nd in Round 2 as team KMU_DDPSLAB.",
       },
       {
         date: "Dec. 2023",
         title: "AWS Rookie Championship 2023 — AWS JAM, 1st Place",
         sub: "AWS Korea",
+        note: "1st place in AWS JAM, a timed hands-on challenge solving real-world AWS architecture, DevOps, and operations tasks.",
       },
       {
         date: "Oct. 2022",
         title: "Excellence Award (3rd Place), 4th ROKAF Creative & Innovative Idea Hackathon",
         sub: "Republic of Korea Air Force · IBK Industrial Bank of Korea",
+        href: "https://rokaf.airforce.mil.kr/hackathon/698/subview.do?enc=Zm5jdDF8QEB8JTJGYmJzJTJGaGFja2F0aG9uJTJGODklMkYzMzk3OSUyRmFydGNsVmlldy5kbyUzRmJic0NsU2VxJTNEJTI2aXNWaWV3TWluZSUzRGZhbHNlJTI2cGFnZSUzRDElMjZyZ3NFbmRkZVN0ciUzRCUyNmJic09wZW5XcmRTZXElM0QlMjZyZ3NCZ25kZVN0ciUzRCUyNnNyY2hXcmQlM0QlMjZwYXNzd29yZCUzRCUyNnNyY2hDb2x1bW4lM0QlMjY%3D",
         note: "Team OneShot-OneKill — missile defense operations analysis platform using AI and big-data technologies.",
       },
       {
         date: "Aug. 2020",
         title: "Industrial Service Medal (산업포장)",
         sub: "Republic of Korea",
+        note: "State decoration of the Republic of Korea, conferred for the 4th-place finish in Cloud Computing at WorldSkills Kazan 2019.",
       },
       {
         date: "Aug. 2019",
         title: "Medallion for Excellence, Cloud Computing (4th Place)",
         sub: "WorldSkills Kazan 2019",
+        note: "Represented South Korea in the Cloud Computing skill at the 45th WorldSkills Competition — widely known as the Skills Olympics — in Kazan, Russia, finishing 4th among national champions.",
       },
       {
         date: "Oct. 2018",
         title: "Silver Medal, IT Network System Administration",
         sub: "53rd WorldSkills Korea National Competition",
+        note: "2nd place nationwide in IT Network Systems Administration at Korea's national selection for WorldSkills.",
       },
     ],
   },
