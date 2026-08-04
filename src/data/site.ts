@@ -25,6 +25,8 @@ export interface ProjectLink {
 export interface Project {
   title: string
   venue: string
+  /** Rendered as the same gold star badge used in Publications. */
+  award?: string
   desc: string
   links: ProjectLink[]
   /** Representative figure from the paper, served from public/projects/. */
@@ -49,7 +51,8 @@ export const PROJECTS: Project[] = [
   },
   {
     title: "Callisto",
-    venue: "KCC 2025 · BEST PAPER",
+    venue: "KCC 2025",
+    award: "Best Paper Award",
     desc: "Cost-efficient AI development platform using spot instances — reclaiming idle cloud capacity to provide affordable AI development environments. Best Paper Award at KCC 2025.",
     links: [
       {

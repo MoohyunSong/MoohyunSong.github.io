@@ -1,5 +1,6 @@
 import { useState } from "react"
 
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { PROJECTS, type Project } from "@/data/site"
 
@@ -29,7 +30,14 @@ function ProjectItem({ project }: { project: Project }) {
       )}
       <div className="flex flex-col gap-2">
         <div className="text-[17px] font-bold tracking-[-0.01em]">{project.title}</div>
-        <div className="text-[13px] font-semibold text-primary">{project.venue}</div>
+        <div className="flex flex-wrap items-center gap-x-3.5 gap-y-1.5">
+          <span className="text-[13px] font-semibold text-primary">{project.venue}</span>
+          {project.award && (
+            <Badge className="rounded bg-award-bg px-2 py-0.5 text-[11px] font-medium text-award">
+              ★ {project.award}
+            </Badge>
+          )}
+        </div>
         <div className="text-sm text-subtle [text-wrap:pretty]">{project.desc}</div>
         <div className="mt-0.5 flex flex-wrap gap-2.5">
           {project.links.map((link) => (
