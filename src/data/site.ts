@@ -123,12 +123,6 @@ export const CV_SECTIONS: CvSection[] = [
     heading: "Honors & Awards",
     items: [
       {
-        date: "May 2026",
-        title: "CCGrid 2026 Student Travel Grant",
-        sub: "26th IEEE International Symposium on Cluster, Cloud and Internet Computing",
-        note: "Competitive travel grant supported by Western Sydney University, awarded with priority to students presenting accepted papers. Presented a first-author paper at CCGrid 2026 in Sydney, Australia.",
-      },
-      {
         date: "Jul. 2025",
         title: "Best Paper Award",
         sub: "KIISE Korea Computer Congress 2025 (KCC 2025)",
@@ -171,6 +165,17 @@ export const CV_SECTIONS: CvSection[] = [
         title: "Silver Medal, IT Network System Administration",
         sub: "53rd WorldSkills Korea National Competition",
         note: "2nd place nationwide in IT Network Systems Administration at the 53rd National Skills Competition of Korea.",
+      },
+    ],
+  },
+  {
+    heading: "Grants & Funding",
+    items: [
+      {
+        date: "May 2026",
+        title: "CCGrid 2026 Student Travel Grant",
+        sub: "26th IEEE International Symposium on Cluster, Cloud and Internet Computing · AUD $1,500",
+        note: "Competitive travel grant supported by Western Sydney University, awarded with priority to students presenting accepted papers. Presented a first-author paper at CCGrid 2026 in Sydney, Australia.",
       },
     ],
   },
