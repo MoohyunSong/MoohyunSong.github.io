@@ -1,75 +1,77 @@
 # CLAUDE.md
 
-Personal academic website built on [al-folio](https://github.com/alshedivat/al-folio) (Jekyll + jekyll-scholar). Hosted at MoohyunSong.github.io.
+Personal academic website of Moohyun Song. React 19 + Vite + Tailwind CSS v4 + shadcn/ui
+single-page app (sections: About / Publications / Projects / CV). Live at
+https://mhsong.cc (repo `MoohyunSong.github.io`). Rewritten in Aug 2026 from the previous
+Jekyll/al-folio site; design based on ty-kim7.github.io.
 
 ## Local development
 
+Node 22+ (CI uses 22).
+
 ```bash
-bundle install            # first time only
-bundle exec jekyll serve  # dev server at http://localhost:4000, live reload
-bundle exec jekyll build  # one-off build into _site/
+npm install        # first time only
+npm run dev        # dev server with HMR at http://localhost:5173
+npm run build      # tsc -b && vite build → dist/
+npm run lint       # oxlint
+npm run preview    # serve the production build locally
+npm run check:pubs # sanity-check the papers.bib parsing pipeline
 ```
-
-## Deploy
-
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds with `JEKYLL_ENV=production`, purges unused CSS, and publishes `_site/` to GitHub Pages.
-
-Caveat: the workflow only triggers on changes to `assets/**`, `**.bib`, `**.html`, `**.js`, `**.liquid`, `**/*.md`, `**.yml`, and `Gemfile*`. It does NOT list `**.rb`, so editing only a file under `_plugins/` won't trigger a deploy on its own — pair it with a triggering change, or run the workflow manually (Actions → Deploy site → Run workflow).
 
 ## Adding a publication
 
-Add a BibTeX entry to `_bibliography/papers.bib`. Nothing else needs editing — the section it lands in, the header count, and the CV publication list are all derived from the entry.
+Add a BibTeX entry to `src/data/papers.bib`. Nothing else needs editing — the section it
+lands in, the counts header, and the CV publication list are all derived at runtime
+(`src/data/bib.ts` parses the file via a Vite `?raw` import; the dev server hot-reloads
+on save).
 
 - Type: `@inproceedings` for conferences, `@article` for journals.
 - Citation key convention: `{lastname}{year}{shortname}`, e.g. `song2026mcptool`.
-- `keywords={international}` or `keywords={domestic}` is REQUIRED — it decides both the section on the publications page and whether the entry is counted. The section is (type × scope): e.g. `@inproceedings` + `international` → "International Conference".
-- `bibtex_show={true}` shows the BibTeX button.
-- Equal contribution: append `*` to each equal author's last name (`Song*, Moohyun`) and add `annotation={* Equal contribution}`.
-- Homepage "selected papers": add `selected={true}`.
-- Common fields: `title`, `author`, `year`, `booktitle` (or `journal`), `publisher`, `pages`, `doi`, `url`, `abstract`, `html` (external link), `series`, `isbn`, `note`.
+- `keywords={international}` or `keywords={domestic}` is REQUIRED — it decides the
+  section (type × scope, e.g. `@inproceedings` + `international` → "International
+  Conference") and the counts header. Entries missing it are silently dropped
+  (`npm run check:pubs` warns).
+- Equal contribution: append `*` to each equal author's LAST name in the bib
+  (`Song*, Moohyun`); it renders as a trailing `*` on the displayed name.
+- Award badge: add `award={Best Paper Award}` to show a ★ badge on the entry.
+- Link resolution for the PAPER button: `html` > `url` > `doi` (no link → no button).
+- `note={To appear}` renders as an italic note next to the venue and in the CV line.
+- Venue display: `booktitle`, plus ` ({series})` appended unless the booktitle already
+  ends with a parenthesized abbreviation. CV citation uses the compact form
+  (`Proc. {series}` / `Proc. {ABBR} '{yy}` / full booktitle; journals get vol/no/pp).
 
-Example:
+After adding an entry, run `npm run check:pubs` (parser sanity assertions) and eyeball
+the Publications section in `npm run dev`.
 
-```bibtex
-@inproceedings{song2026example,
-  author={Song, Moohyun and Lee, Kyungyong},
-  title={A Great Paper Title},
-  booktitle={Proceedings of Some Conference},
-  year={2026},
-  keywords={international},
-  bibtex_show={true}
-}
-```
+## Content locations
 
-## Publication counts (automatic)
+- `src/data/papers.bib` — every publication (single source of truth).
+- `src/data/bib.ts` — BibTeX parser + derivations (pure TS, no Vite/React imports so the
+  check script can run it under plain Node).
+- `src/data/publications.ts` — glue: parses the bib once, exports `PUBLICATIONS`,
+  `PUB_SECTIONS`, `PUB_COUNTS`, `CV_PUBLICATIONS_SECTION`.
+- `src/data/site.ts` — everything else: `ME`, nav, contacts (email/ORCID/Scholar/
+  GitHub/LinkedIn), projects, CV sections. The CV's Publications section is spliced in
+  from `publications.ts` — never hand-edit publication data here.
+- `src/components/` — About (bio/hero; prose lives in JSX), Publications, Projects,
+  Vitae, Header, Footer. `src/components/ui/` — vendored shadcn primitives.
+- `public/projects/` — optional project figures; set `image: "/projects/foo.png"` on a
+  `PROJECTS` entry in `site.ts` (entries without an image get a dashed placeholder).
+- No profile photo and no CV PDF by design (the Vitae download button was removed; if a
+  PDF is added later, put it in `public/cv/` and restore the button in `Vitae.tsx`).
 
-The "**N publications** (...)" line in `_pages/publications.md` is generated, not hand-written. Do not edit the numbers manually.
+## Deploy
 
-`_plugins/publication-counts.rb` parses `papers.bib` at build time and exposes `site.pub_counts`:
+Pushing to `main` triggers `.github/workflows/deploy.yml`: Node 22 → `npm ci` →
+`npm run build` → upload `dist/` as a Pages artifact → `actions/deploy-pages`. There are
+NO path filters — every push builds and deploys (the old Jekyll workflow's path-filter
+footgun is gone).
 
-- `site.pub_counts.total` — total count
-- `site.pub_counts.summary` — breakdown string (e.g. "4 international conferences, 1 domestic journal, 5 domestic conferences"), pluralized, omitting empty buckets
-- per-bucket: `international_journal`, `international_conference`, `domestic_journal`, `domestic_conference`
-
-It counts only `@article` / `@inproceedings` entries tagged `international` / `domestic`, so the header always matches what the page actually renders. Logic can be sanity-checked without a full build via a plain-Ruby harness that stubs `Jekyll::Generator` and calls `generate` on a fake site.
-
-## CV publications (automatic)
-
-The CV's **Publications** section is generated from `papers.bib`, not hand-written. In `_data/cv.yml` that section is just `contents: []`; `_plugins/cv-publications.rb` fills it at build time, grouped by year (descending). Add papers to `papers.bib`, never to `cv.yml`.
-
-Citation format is derived from existing bib fields only (per design choice — no extra fields):
-
-- Authors → initials + last name, Oxford comma (`Song, Moohyun` → `M. Song`; equal-contribution `*` stripped).
-- Venue: `Proc. {series}` if `series` is set; else `Proc. {ABBR} '{yy}` if the `booktitle` ends with a parenthesized abbreviation like `(KCC)`; else the full `booktitle`. `@article` uses the full `journal` name + `vol./no./pp.`
-- The title links to `html` / `url` / `doi` when present.
-
-So a venue with no `series` and no `(ABBR)` in its `booktitle` renders with its full name. Counts and CV both parse `papers.bib` independently, so they always agree.
-
-## Key files
-
-- `_pages/about.md` — landing page: intro, affiliations (incl. DDPS Lab link `https://ddps.cloud`), profile sidebar.
-- `_pages/publications.md` — publications list: auto count header + sections queried by keyword.
-- `_bibliography/papers.bib` — every publication.
-- `_data/cv.yml` — CV / resume content (the Publications section is auto-filled from `papers.bib`).
-- `_config.yml` — site + jekyll-scholar config (`scholar.source`, `scholar.bibliography`).
-- `_plugins/` — custom Ruby plugins (publication counts, CV publications, scholar citation badges, etc.).
+- Custom domain `mhsong.cc` is a repository **Pages setting** (Settings → Pages), not
+  driven by `public/CNAME` (that file is informational under artifact deploys).
+- Migration note (Aug 2026): Pages source was manually switched from "Deploy from a
+  branch (gh-pages)" to "GitHub Actions". The legacy `gh-pages` branch is the old Jekyll
+  site; rollback = flip the Pages source setting back to it. Once confident, it can be
+  deleted (`git push origin --delete gh-pages`).
+- If `npm ci` fails in CI after editing `package.json`, re-run `npm install` locally and
+  commit the lockfile.

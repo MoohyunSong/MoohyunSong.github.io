@@ -1,0 +1,148 @@
+@inproceedings{kim2026ddd,
+  author={Kim, Kyumin and Song, Moohyun and Kim, Taeyoon and Lee, Kyungyong},
+  title={Ding-Dong Ditch: Peeking Into Spot Instance Availability},
+  year={2026},
+  booktitle={2026 IEEE 19th International Conference on Cloud Computing (CLOUD)},
+  series={IEEE CLOUD 2026},
+  note={To appear},
+  keywords={international},
+  bibtex_show={true}
+}
+
+@inproceedings{song2026edgeagent,
+  author={Song, Moohyun and Kim, Hayoung and Lee, Kyoohyun and Son, Jae Gi and Lee, Kyungyong},
+  title={Orchestrating WASM-based MCP Tool Runtimes for AI Agents across Edge-Cloud Continuum},
+  year={2026},
+  booktitle={Proceedings of the 26th IEEE/ACM International Symposium on Cluster, Cloud and Internet Computing},
+  series={CCGrid '26},
+  note={To appear},
+  keywords={international},
+  bibtex_show={true}
+}
+
+@inproceedings{kang2025hybridserve,
+  author={Kang*, Seokhyeon and Song*, Moohyun and Kim*, Taeyoon and Lee, Soohyuk and Han, Jaeseob and Kim, Hyeokman and Lee, Kyungyong},
+  title={HybridServe: Adaptive WebAssembly-Container Runtime Selection for Edge Serverless Computing},
+  annotation={* Equal contribution},
+  year={2025},
+  isbn={9798400723025},
+  publisher={Association for Computing Machinery},
+  url={https://doi.org/10.1145/3774899.3775011},
+  doi={10.1145/3774899.3775011},
+  abstract={Edge serverless environments with limited CPU, memory, and heterogeneous hardware demand efficient execution under resource constraints. A key challenge in serverless computing is cold start, where a function instance is created and initialized from scratch instead of reusing an already initialized (warm) instance, which is particularly severe in edge environments. Container-based platforms exhibit cold start latencies exceeding hundreds of milliseconds with tens of megabyte images, while WebAssembly (WASM) provides less than ten millisecond initialization and compact binaries, but slower execution. We comprehensively analyze multiple WASM runtimes (Wasmtime, Wasmer, WasmEdge) and their compiler backends, revealing that WASM reduces cold start latency by up to 88.1% and image size by up to 99.17%, while exhibiting 36.15% slower execution and 9.26% higher power consumption for compute-intensive workloads. Based on these complementary characteristics, we propose HybridServe, a dynamic runtime selection framework that leverages WASM during container cold starts while preparing containers in the background. Evaluation on Azure Function Trace demonstrates 43.11% average response time reduction versus WASM-only and 91.9% cold start latency reduction versus container-only deployments, effectively mitigating the performance-isolation trade-off in edge serverless computing.},
+  booktitle={Proceedings of the 11th International Workshop on Serverless Computing},
+  pages={1--6},
+  numpages={6},
+  series={WoSC11 '25},
+  keywords={international},
+  bibtex_show={true}
+}
+
+@inproceedings{cheon2025multinode,
+  author={Cheon*, Sungkyu and Kim*, Kyumin and Kim*, Kyunghwan and Song, Moohyun and Lee, Kyungyong},
+  title={Multi-Node Spot Instances Availability Score Collection System},
+  annotation={* Equal contribution},
+  year={2025},
+  isbn={9798400718694},
+  publisher={Association for Computing Machinery},
+  url={https://doi.org/10.1145/3731545.3735122},
+  doi={10.1145/3731545.3735122},
+  abstract={Spot instances let users access unused cloud resources at significantly reduced costs. While cloud vendors offer availability information, existing tools like Spotlake only provide single-node availability data, which falls short for modern distributed applications. This paper highlighted the limitations of single-node availability data and introduced a multi-node availability dataset collection system. We analyzed the collected data and enhanced Spotlake to share these multi-node datasets publicly for broader use.},
+  booktitle={Proceedings of the 34th International Symposium on High-Performance Parallel and Distributed Computing},
+  articleno={33},
+  numpages={2},
+  series={HPDC '25},
+  keywords={international},
+  bibtex_show={true}
+}
+
+@inproceedings{song2025callisto,
+  title={Callisto: Cost-Efficient AI Development Platform Using Spot Instances},
+  author={Song, Moohyun and Kim, Taeyoon and Kim, Kyumin and Lee, Kyungyong},
+  booktitle={Proceedings of the Korea Computer Congress (KCC)},
+  publisher={Korean Institute of Information Scientists and Engineers},
+  pages={617--619},
+  year={2025},
+  html={https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12318265},
+  award={Best Paper Award},
+  keywords={domestic},
+  bibtex_show={true}
+}
+
+@inproceedings{song2025costnorm,
+  title={CostNorm: LLM-based Cloud Cost Optimization AI Agent},
+  author={Song, Moohyun and Park, Woohyeok and Bae, Yongha and Kim, Jongmin and Kim, Donghun and Kim, Jangho},
+  booktitle={Annual Conference of KIPS},
+  publisher={Korea Information Processing Society},
+  pages={56--57},
+  year={2025},
+  html={https://koreascience.or.kr/article/CFKO202520950404978.page},
+  keywords={domestic},
+  bibtex_show={true}
+}
+
+@inproceedings{song2024mlpipeline,
+  title={Machine Learning Pipeline Deployment Platform Considering Optimal Performance and Cost},
+  author={Song, Moohyun and Cheon, Seungwoo and Kim, Kyumin and Kim, Yurim and Moon, Jihun and Park, Jungmyung},
+  booktitle={Proceedings of the Korea Computer Congress (KCC)},
+  publisher={Korean Institute of Information Scientists and Engineers},
+  pages={621--623},
+  year={2024},
+  html={https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11861932},
+  keywords={domestic},
+  bibtex_show={true}
+}
+
+@inproceedings{song2023serverless,
+  author={Song, Moohyun and Hur, Yoonseo and Lee, Kyungyong},
+  title={When Serverless Computing Meets Different Degrees of Customization for DNN Inference},
+  year={2023},
+  isbn={9798400704550},
+  publisher={Association for Computing Machinery},
+  url={https://doi.org/10.1145/3631295.3631400},
+  doi={10.1145/3631295.3631400},
+  abstract={Serverless computing provides a method to develop application services without the burden of run-time execution environment management overhead. Since the initial offerings of serverless computing using function-as-a-service (FaaS), other variants of execution environments have been proposed, such as a special-purpose FaaS (SPF) for deep neural network (DNN) inference and a serverless container service (SCS) for general web applications. This paper qualitatively summarizes the characteristics of a general-purpose FaaS (GPF), SPF, and SCS from the perspective of customizability when setting up execution environments. To judge whether various serverless computing environments can be feasible solutions for an interactive DNN model inference application, we conduct extensive experiments and conclude that there are rooms for performance improvement serverless DNN inference, and allowing a custom environment setup can make the serverless computing platform for an interactive DNN application.},
+  booktitle={Proceedings of the 9th International Workshop on Serverless Computing},
+  pages={42--47},
+  numpages={6},
+  series={WoSC '23},
+  keywords={international},
+  bibtex_show={true}
+}
+
+@article{song2023kubevc,
+  title={KubEVC-Agent: Kubernetes Edge Vision Cluster Agent for Optimal DNN Inference and Operation},
+  author={Song, Moohyun and Kim, Kyumin and Moon, Jihun and Kim, Yurim and Nam, Chaewon and Park, Jongbin and Lee, Kyungyong},
+  journal={IEMEK Journal of Embedded Systems and Applications},
+  volume={18},
+  number={6},
+  pages={293--301},
+  year={2023},
+  html={https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003027702},
+  keywords={domestic},
+  bibtex_show={true}
+}
+
+@inproceedings{hwang2023spot,
+  title={Optimize Spot Instance Live Migration Using Network Storage in Cloud-Native Environment},
+  author={Hwang, Jaeil and Song, Moohyun and Lim, Junho and Lee, Kyungyong},
+  booktitle={Proceedings of the Korea Computer Congress (KCC)},
+  publisher={Korean Institute of Information Scientists and Engineers},
+  pages={1323--1325},
+  year={2023},
+  html={https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11705422},
+  keywords={domestic},
+  bibtex_show={true}
+}
+
+@inproceedings{song2023kubernetes,
+  title={Open-Source Automated Software for Deploying Kubernetes Machine Learning Environment},
+  author={Song, Moohyun and Choi, Jaegang and Lee, Kyungyong},
+  booktitle={Proceedings of the Korea Computer Congress (KCC)},
+  publisher={Korean Institute of Information Scientists and Engineers},
+  pages={435--437},
+  year={2023},
+  html={https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11488063},
+  keywords={domestic},
+  bibtex_show={true}
+}

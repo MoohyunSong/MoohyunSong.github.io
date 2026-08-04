@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Moohyun Song, Ph.D. student in Artificial Intelligence at Hanyang University (DDPS Lab). Research on distributed systems, cloud computing, and AI platforms."
+    />
+    <meta property="og:title" content="Moohyun Song" />
+    <meta
+      property="og:description"
+      content="Ph.D. student in Artificial Intelligence at Hanyang University (DDPS Lab) — distributed systems, cloud computing, AI platforms."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mhsong.cc/" />
+    <title>Moohyun Song</title>
+    <script>
+      ;(function () {
+        var t = localStorage.getItem("theme")
+        if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.classList.add("dark")
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
