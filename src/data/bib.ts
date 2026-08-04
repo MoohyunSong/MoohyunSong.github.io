@@ -19,8 +19,8 @@ export interface BibEntry {
   raw: string
 }
 
-export type Scope = "international" | "domestic"
-export type Kind = "conference" | "journal"
+export type Scope = "international" | "domestic" | "preprint"
+export type Kind = "conference" | "journal" | "preprint"
 
 export interface Publication {
   key: string
@@ -44,6 +44,8 @@ export interface PubCounts {
   internationalConference: number
   domesticJournal: number
   domesticConference: number
+  /** Under-review preprints; NOT included in `total` or `summary`. */
+  preprints: number
   total: number
   /** e.g. "5 international conferences, 1 domestic journal, 5 domestic conferences" */
   summary: string
@@ -196,6 +198,8 @@ function splitAuthors(field: string): string[] {
 /** Display venue for the Publications section: the conference name itself. */
 function displayVenue(entry: BibEntry, kind: Kind): string {
   const f = entry.fields
+  if (kind === "preprint")
+    return f.arxiv ? `arXiv preprint arXiv:${f.arxiv}` : cleanBraces(f.howpublished ?? "Preprint")
   if (kind === "journal") return cleanBraces(f.journal ?? "")
   let base = cleanBraces(f.booktitle ?? "").replace(/^proceedings of (the )?/i, "")
   // Append the series abbreviation unless the booktitle already ends with one,
@@ -208,6 +212,11 @@ function displayVenue(entry: BibEntry, kind: Kind): string {
 function cvVenue(entry: BibEntry, kind: Kind): string {
   const f = entry.fields
   let venue: string
+  if (kind === "preprint") {
+    venue = f.arxiv ? `arXiv preprint arXiv:${f.arxiv}` : cleanBraces(f.howpublished ?? "Preprint")
+    if (f.note) venue += ` (${f.note})`
+    return venue
+  }
   if (kind === "journal") {
     venue = cleanBraces(f.journal ?? "")
     if (f.volume) venue += `, vol. ${f.volume}`
@@ -228,18 +237,25 @@ export function toPublications(entries: BibEntry[]): Publication[] {
   const pubs: Publication[] = []
   for (const entry of entries) {
     const f = entry.fields
-    const kind: Kind | undefined =
-      entry.type === "article"
-        ? "journal"
-        : entry.type === "inproceedings" || entry.type === "conference"
-          ? "conference"
-          : undefined
     const keywords = (f.keywords ?? "").toLowerCase()
-    const scope: Scope | undefined = keywords.includes("international")
-      ? "international"
-      : keywords.includes("domestic")
-        ? "domestic"
-        : undefined
+    let kind: Kind | undefined
+    let scope: Scope | undefined
+    if (keywords.includes("preprint")) {
+      kind = "preprint"
+      scope = "preprint"
+    } else {
+      kind =
+        entry.type === "article"
+          ? "journal"
+          : entry.type === "inproceedings" || entry.type === "conference"
+            ? "conference"
+            : undefined
+      scope = keywords.includes("international")
+        ? "international"
+        : keywords.includes("domestic")
+          ? "domestic"
+          : undefined
+    }
     const year = /\d{4}/.exec(f.year ?? "")?.[0]
     if (!kind || !scope || !year) continue
 
@@ -254,7 +270,11 @@ export function toPublications(entries: BibEntry[]): Publication[] {
       categories: f.category
         ? f.category.split(",").map((c) => c.trim()).filter(Boolean)
         : undefined,
-      link: f.html ?? f.url ?? (f.doi ? `https://doi.org/${f.doi}` : undefined),
+      link:
+        f.html ??
+        f.url ??
+        (f.doi ? `https://doi.org/${f.doi}` : undefined) ??
+        (f.arxiv ? `https://arxiv.org/abs/${f.arxiv}` : undefined),
       scope,
       kind,
       bibtex: entry.raw,
@@ -277,7 +297,9 @@ export function countPublications(pubs: Publication[]): PubCounts {
     internationalConference: buckets[1][0],
     domesticJournal: buckets[2][0],
     domesticConference: buckets[3][0],
-    total: pubs.length,
+    preprints: count("preprint", "preprint"),
+    // Preprints are visible on the page but not counted as publications.
+    total: buckets.reduce((sum, [n]) => sum + n, 0),
     summary: buckets
       .filter(([n]) => n > 0)
       .map(([n, label]) => `${n} ${label}${n === 1 ? "" : "s"}`)
@@ -292,6 +314,7 @@ function groupByYear(pubs: Publication[]): YearGroup[] {
 
 export function groupSections(pubs: Publication[]): PubSection[] {
   const order: Array<[string, Scope, Kind]> = [
+    ["Under Review", "preprint", "preprint"],
     ["International Journal", "international", "journal"],
     ["International Conference", "international", "conference"],
     ["Domestic Journal", "domestic", "journal"],

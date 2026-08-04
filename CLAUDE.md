@@ -25,7 +25,10 @@ lands in, the counts header, and the CV publication list are all derived at runt
 (`src/data/bib.ts` parses the file via a Vite `?raw` import; the dev server hot-reloads
 on save).
 
-- Type: `@inproceedings` for conferences, `@article` for journals.
+- Type: `@inproceedings` for conferences, `@article` for journals, `@misc` +
+  `keywords={preprint}` + `arxiv={2606.18600}` + `note={Under review}` for under-review
+  preprints (rendered in an "Under Review" section first, linked to arXiv, and NOT
+  counted in the publications total; move to `@inproceedings`/`@article` on acceptance).
 - Citation key convention: `{lastname}{year}{shortname}`, e.g. `song2026mcptool`.
 - `keywords={international}` or `keywords={domestic}` is REQUIRED — it decides the
   section (type × scope, e.g. `@inproceedings` + `international` → "International

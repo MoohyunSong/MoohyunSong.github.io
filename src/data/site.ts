@@ -36,6 +36,12 @@ export interface Project {
 // image: "/projects/<name>.png" (plus imageAlt) on the entry below.
 export const PROJECTS: Project[] = [
   {
+    title: "EdgeAgent",
+    venue: "CCGRID 2026",
+    desc: "Orchestrating WASM-based MCP tool runtimes for AI agents across the edge-cloud continuum, placing lightweight tool execution close to where agents need it.",
+    links: [{ label: "PAPER", href: "https://ieeexplore.ieee.org/document/11619021" }],
+  },
+  {
     title: "Callisto",
     venue: "KCC 2025 · BEST PAPER",
     desc: "Cost-efficient AI development platform using spot instances — reclaiming idle cloud capacity to provide affordable AI development environments. Best Paper Award at KCC 2025.",
@@ -45,12 +51,6 @@ export const PROJECTS: Project[] = [
         href: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12318265",
       },
     ],
-  },
-  {
-    title: "EdgeAgent",
-    venue: "CCGRID 2026",
-    desc: "Orchestrating WASM-based MCP tool runtimes for AI agents across the edge-cloud continuum, placing lightweight tool execution close to where agents need it.",
-    links: [{ label: "PAPER", href: "https://ieeexplore.ieee.org/document/11619021" }],
   },
 ]
 

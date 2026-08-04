@@ -31,9 +31,10 @@ for (const e of excluded) {
 
 assert.equal(entries.length, pubs.length, "every bib entry should become a publication")
 
-// Counts derived from the current file; update when adding entries changes them.
-assert.equal(counts.total, entries.length)
-assert.equal(counts.total, pubs.length)
+// Counts derived from the current file; preprints are visible but not counted.
+const published = pubs.filter((p) => p.scope !== "preprint")
+assert.equal(counts.total, published.length)
+assert.equal(counts.preprints, pubs.length - published.length)
 assert.equal(
   counts.summary,
   [
@@ -86,6 +87,14 @@ assert.equal(byKey("song2026edgeagent").categories, undefined)
 assert.deepEqual(byKey("cheon2025multinode").categories, ["Poster"])
 assert.deepEqual(byKey("hwang2023spot").categories, ["Poster"])
 
+// Preprints: keywords={preprint} + arxiv={...} -> Under Review section, arXiv link.
+const shuntserve = byKey("jeong2026shuntserve")
+assert.equal(shuntserve.venue, "arXiv preprint arXiv:2606.18600")
+assert.equal(shuntserve.link, "https://arxiv.org/abs/2606.18600")
+assert.equal(shuntserve.note, "Under review")
+assert.equal(sections[0].heading, "Under Review")
+assert.equal(sections[0].years.flatMap((y) => y.items).length, 2)
+
 // Section grouping: no empty sections, year-descending inside each.
 for (const section of sections) {
   assert.ok(section.years.length > 0)
@@ -113,6 +122,11 @@ assert.ok(cvOf("song2026edgeagent").sub.includes("J. G. Son"))
 assert.ok(cvOf("song2025callisto").sub.endsWith("Proc. KCC '25, pp. 617–619"))
 assert.ok(cvOf("song2025costnorm").sub.includes("Annual Conference of KIPS"))
 assert.ok(cvOf("hwang2023spot").sub.endsWith("(Poster)"))
+assert.ok(
+  cvOf("kim2026spotvista").sub.endsWith("arXiv preprint arXiv:2604.24548 (Under review)"),
+)
 
-console.log(`OK: ${counts.total} publications (${counts.summary})`)
+console.log(
+  `OK: ${counts.total} publications (${counts.summary}) + ${counts.preprints} under review`,
+)
 console.log(`Sections: ${sections.map((s) => `${s.heading} [${s.years.flatMap((y) => y.items).length}]`).join(", ")}`)
