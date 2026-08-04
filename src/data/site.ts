@@ -181,6 +181,11 @@ export const CV_SECTIONS: CvSection[] = [
         sub: "26th IEEE International Symposium on Cluster, Cloud and Internet Computing · AUD $1,500",
         note: "Competitive travel grant supported by Western Sydney University, awarded with priority to students presenting accepted papers. Presented a first-author paper at CCGrid 2026 in Sydney, Australia.",
       },
+      {
+        date: "Spring 2023 · Fall 2023 · Fall 2025",
+        title: "Scholarship for SW Excellence Student",
+        sub: "Kookmin University",
+      },
     ],
   },
 ]

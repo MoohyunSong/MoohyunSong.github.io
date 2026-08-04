@@ -6,7 +6,7 @@ import { PROJECTS, type Project } from "@/data/site"
 
 function FigurePlaceholder() {
   return (
-    <div className="flex h-[124px] w-full max-w-[200px] items-center justify-center rounded-[10px] border-[1.5px] border-dashed border-black/25 bg-[#f2f1ef] text-[13px] text-[#6e6c66] dark:border-white/20 dark:bg-secondary dark:text-muted-foreground">
+    <div className="flex h-[124px] w-full max-w-[200px] items-center justify-center rounded-[10px] border-[1.5px] border-dashed border-black/25 bg-[#eef3f8] text-[13px] text-[#67717b] dark:border-white/20 dark:bg-secondary dark:text-muted-foreground">
       Figure
     </div>
   )

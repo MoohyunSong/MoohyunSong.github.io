@@ -4,23 +4,23 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #fcfcfa;
+  --background: #f7fafd;
   --foreground: #16181d;
-  --card: #fcfcfa;
+  --card: #f7fafd;
   --card-foreground: #16181d;
-  --popover: #fcfcfa;
+  --popover: #f7fafd;
   --popover-foreground: #16181d;
   --primary: #1d5fd6;
   --primary-foreground: #ffffff;
-  --secondary: #f3f2ee;
+  --secondary: #edf3f9;
   --secondary-foreground: #3d4046;
-  --muted: #f3f2ee;
-  --muted-foreground: #8b8880;
-  --accent: #eef4fd;
+  --muted: #edf3f9;
+  --muted-foreground: #7f8a95;
+  --accent: #e3eefb;
   --accent-foreground: #1d5fd6;
   --destructive: #c9432a;
-  --border: #e9e7e2;
-  --input: #e9e7e2;
+  --border: #dfe8f0;
+  --input: #dfe8f0;
   --ring: #1d5fd6;
   --radius: 0.625rem;
 
