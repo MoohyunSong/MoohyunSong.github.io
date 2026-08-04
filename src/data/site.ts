@@ -165,7 +165,7 @@ export const CV_SECTIONS: CvSection[] = [
         date: "Oct. 2018",
         title: "Silver Medal, IT Network System Administration",
         sub: "53rd WorldSkills Korea National Competition",
-        note: "2nd place nationwide in IT Network Systems Administration at Korea's national selection for WorldSkills.",
+        note: "2nd place nationwide in IT Network Systems Administration at the 53rd National Skills Competition of Korea.",
       },
     ],
   },
