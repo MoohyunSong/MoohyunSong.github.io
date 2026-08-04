@@ -126,6 +126,7 @@ export const CV_SECTIONS: CvSection[] = [
         date: "Jul. 2025",
         title: "Best Paper Award",
         sub: "KIISE Korea Computer Congress 2025 (KCC 2025)",
+        href: "https://www.kiise.or.kr/academy/board/academyNewsView.fa?NUM=2713&type=weeklynews&PAGE=11&MENU_ID=080100&at=All&aw=&sch_add_bd=All",
         note: "Received as first author for \"Callisto: Cost-Efficient AI Development Platform Using Spot Instances\" at KIISE KCC 2025.",
       },
       {
