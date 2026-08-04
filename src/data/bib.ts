@@ -224,8 +224,8 @@ function cvVenue(entry: BibEntry, kind: Kind): string {
   } else {
     const book = cleanBraces(f.booktitle ?? "")
     const abbr = /\(([^)]+)\)\s*$/.exec(book)
-    if (f.series) venue = `Proc. ${f.series}`
-    else if (abbr) venue = `Proc. ${abbr[1]} '${(f.year ?? "").slice(-2)}`
+    if (f.series) venue = f.series
+    else if (abbr) venue = `${abbr[1]} '${(f.year ?? "").slice(-2)}`
     else venue = book
   }
   if (f.pages) venue += `, pp. ${displayPages(f.pages)}`

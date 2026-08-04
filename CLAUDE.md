@@ -43,9 +43,10 @@ on save).
   appended to the CV citation line, e.g. "(Poster)".
 - Link resolution for the PAPER button: `html` > `url` > `doi` (no link → no button).
 - `note={To appear}` renders as an italic note next to the venue and in the CV line.
-- Venue display: `booktitle`, plus ` ({series})` appended unless the booktitle already
-  ends with a parenthesized abbreviation. CV citation uses the compact form
-  (`Proc. {series}` / `Proc. {ABBR} '{yy}` / full booktitle; journals get vol/no/pp).
+- Venue display: `booktitle` (minus any "Proceedings of the" prefix), plus ` ({series})`
+  appended unless the booktitle already ends with a parenthesized abbreviation. CV
+  citation uses the compact form (`{series}` / `{ABBR} '{yy}` / full booktitle;
+  journals get vol/no/pp).
 
 After adding an entry, run `npm run check:pubs` (parser sanity assertions) and eyeball
 the Publications section in `npm run dev`.

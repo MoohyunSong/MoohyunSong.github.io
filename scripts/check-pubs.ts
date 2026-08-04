@@ -111,15 +111,15 @@ const cvOf = (key: string) => {
 }
 assert.equal(
   cvOf("kang2025hybridserve").sub,
-  "S. Kang*, M. Song*, T. Kim*, S. Lee, J. Han, H. Kim, and K. Lee · Proc. WoSC11 '25, pp. 1–6",
+  "S. Kang*, M. Song*, T. Kim*, S. Lee, J. Han, H. Kim, and K. Lee · WoSC11 '25, pp. 1–6",
 )
 // Owner name is attached as the emphasis target; Song is unstarred where applicable.
 assert.equal(cvOf("kang2025hybridserve").highlight, "M. Song")
 assert.ok(cvOf("cheon2025multinode").sub.includes("M. Song,"))
 assert.ok(cvOf("song2023kubevc").sub.endsWith("vol. 18, no. 6, pp. 293–301"))
-assert.ok(cvOf("kim2026ddd").sub.endsWith("Proc. IEEE CLOUD 2026 (To appear)"))
+assert.ok(cvOf("kim2026ddd").sub.endsWith("IEEE CLOUD 2026 (To appear)"))
 assert.ok(cvOf("song2026edgeagent").sub.includes("J. G. Son"))
-assert.ok(cvOf("song2025callisto").sub.endsWith("Proc. KCC '25, pp. 617–619"))
+assert.ok(cvOf("song2025callisto").sub.endsWith("KCC '25, pp. 617–619"))
 assert.ok(cvOf("song2025costnorm").sub.includes("Annual Conference of KIPS"))
 assert.ok(cvOf("hwang2023spot").sub.endsWith("(Poster)"))
 assert.ok(
