@@ -80,6 +80,14 @@ assert.equal(byKey("song2025callisto").award, "Best Paper Award")
 // Conference venues drop the "Proceedings of the" prefix.
 assert.equal(byKey("song2025callisto").venue, "Korea Computer Congress (KCC)")
 assert.ok(byKey("song2026edgeagent").venue.startsWith("26th IEEE/ACM"))
+assert.equal(byKey("hwang2023spot").venue, "Korea Software Congress (KSC)")
+
+// Within a year the bib file order is the display order (newest first);
+// 2023 chronology per the author: Open-Source -> WoSC -> KSC poster -> KubEVC.
+assert.deepEqual(
+  pubs.filter((p) => p.year === "2023").map((p) => p.key),
+  ["song2023kubevc", "hwang2023spot", "song2023serverless", "song2023kubernetes"],
+)
 
 // Oral/Full Paper is the default: entries without a category field get no badges;
 // `category={Poster}` / `category={Short Paper}` mark the exceptions.
