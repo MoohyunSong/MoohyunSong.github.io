@@ -31,13 +31,13 @@ function ProjectItem({ project }: { project: Project }) {
         <div className="text-[17px] font-bold tracking-[-0.01em]">{project.title}</div>
         <div className="text-[13px] font-semibold text-primary">{project.venue}</div>
         <div className="text-sm text-subtle [text-wrap:pretty]">{project.desc}</div>
-        <div className="flex gap-3.5 text-[11.5px] font-medium tracking-[0.04em] text-muted-foreground">
+        <div className="mt-0.5 flex flex-wrap gap-2.5">
           {project.links.map((link) => (
             <a
               key={link.label}
               href={link.href}
               {...(link.href !== "#" && { target: "_blank", rel: "noopener noreferrer" })}
-              className="transition-colors hover:text-primary"
+              className="rounded-md border border-primary-border px-2.5 py-[3px] text-[11px] font-semibold tracking-[0.04em] text-primary transition-colors hover:bg-accent"
             >
               {link.label} ↗
             </a>
@@ -60,25 +60,27 @@ export function Projects() {
           <ProjectItem key={project.title} project={project} />
         ))}
       </div>
-      <div className="mt-10 flex justify-center">
-        {showAll ? (
-          <Button
-            variant="outline"
-            onClick={() => setShowAll(false)}
-            className="h-auto rounded-full border-border bg-transparent px-[22px] py-[9px] text-[13.5px] font-semibold text-muted-foreground hover:border-primary-border hover:bg-transparent hover:text-primary"
-          >
-            Show less ↑
-          </Button>
-        ) : (
-          <Button
-            variant="outline"
-            onClick={() => setShowAll(true)}
-            className="h-auto rounded-full border-primary-border bg-transparent px-[22px] py-[9px] text-[13.5px] font-semibold text-primary hover:bg-accent hover:text-primary"
-          >
-            Learn more ↓
-          </Button>
-        )}
-      </div>
+      {PROJECTS.length > 4 && (
+        <div className="mt-10 flex justify-center">
+          {showAll ? (
+            <Button
+              variant="outline"
+              onClick={() => setShowAll(false)}
+              className="h-auto rounded-full border-border bg-transparent px-[22px] py-[9px] text-[13.5px] font-semibold text-muted-foreground hover:border-primary-border hover:bg-transparent hover:text-primary"
+            >
+              Show less ↑
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              onClick={() => setShowAll(true)}
+              className="h-auto rounded-full border-primary-border bg-transparent px-[22px] py-[9px] text-[13.5px] font-semibold text-primary hover:bg-accent hover:text-primary"
+            >
+              Learn more ↓
+            </Button>
+          )}
+        </div>
+      )}
     </section>
   )
 }

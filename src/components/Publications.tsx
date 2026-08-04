@@ -25,11 +25,19 @@ function PublicationItem({ pub }: { pub: Publication }) {
         {pub.title}
       </div>
       <AuthorList authors={pub.authors} />
-      <div className="flex flex-wrap items-baseline gap-3.5">
+      <div className="flex flex-wrap items-center gap-x-3.5 gap-y-1.5">
         <span className="text-[13.5px] font-semibold text-primary">{pub.venue}</span>
         {pub.note && (
           <span className="text-[11.5px] italic text-muted-foreground">{pub.note}</span>
         )}
+        {pub.categories?.map((category) => (
+          <Badge
+            key={category}
+            className="rounded bg-secondary px-2 py-0.5 text-[11px] font-medium text-subtle"
+          >
+            {category}
+          </Badge>
+        ))}
         {pub.award && (
           <Badge className="rounded bg-award-bg px-2 py-0.5 text-[11px] font-medium text-award">
             ★ {pub.award}
@@ -40,7 +48,7 @@ function PublicationItem({ pub }: { pub: Publication }) {
             href={pub.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[11.5px] font-medium tracking-[0.04em] text-muted-foreground transition-colors hover:text-primary"
+            className="rounded-md border border-primary-border px-2.5 py-[3px] text-[11px] font-semibold tracking-[0.04em] text-primary transition-colors hover:bg-accent"
           >
             PAPER ↗
           </a>

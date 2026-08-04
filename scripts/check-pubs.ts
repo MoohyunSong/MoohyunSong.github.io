@@ -16,7 +16,7 @@ const entries = parseBibtex(src)
 const pubs = toPublications(entries)
 const counts = countPublications(pubs)
 const sections = groupSections(pubs)
-const cv = toCvSection(entries, pubs)
+const cv = toCvSection(entries, pubs, "Moohyun Song")
 
 const byKey = (key: string) => {
   const pub = pubs.find((p) => p.key === key)
@@ -63,7 +63,10 @@ assert.equal(ddd.link, undefined)
 assert.equal(ddd.note, "To appear")
 // Series must not double an existing "(CLOUD)" abbreviation in the venue.
 assert.ok(!ddd.venue.includes("(CLOUD) ("), `unexpected venue: ${ddd.venue}`)
-assert.equal(byKey("song2026edgeagent").link, undefined)
+assert.equal(
+  byKey("song2026edgeagent").link,
+  "https://ieeexplore.ieee.org/document/11619021",
+)
 
 // The only journal entry lands in the Domestic Journal section.
 const kubevc = byKey("song2023kubevc")
@@ -72,6 +75,16 @@ assert.equal(kubevc.venue, "IEMEK Journal of Embedded Systems and Applications")
 
 // Custom award field surfaces on the badge.
 assert.equal(byKey("song2025callisto").award, "Best Paper Award")
+
+// Conference venues drop the "Proceedings of the" prefix.
+assert.equal(byKey("song2025callisto").venue, "Korea Computer Congress (KCC)")
+assert.ok(byKey("song2026edgeagent").venue.startsWith("26th IEEE/ACM"))
+
+// Oral/Full Paper is the default: entries without a category field get no badges;
+// `category={Poster}` / `category={Short Paper}` mark the exceptions.
+assert.equal(byKey("song2026edgeagent").categories, undefined)
+assert.deepEqual(byKey("cheon2025multinode").categories, ["Poster"])
+assert.deepEqual(byKey("hwang2023spot").categories, ["Poster"])
 
 // Section grouping: no empty sections, year-descending inside each.
 for (const section of sections) {
@@ -89,13 +102,17 @@ const cvOf = (key: string) => {
 }
 assert.equal(
   cvOf("kang2025hybridserve").sub,
-  "S. Kang, M. Song, T. Kim, S. Lee, J. Han, H. Kim, and K. Lee · Proc. WoSC11 '25, pp. 1–6",
+  "S. Kang*, M. Song*, T. Kim*, S. Lee, J. Han, H. Kim, and K. Lee · Proc. WoSC11 '25, pp. 1–6",
 )
+// Owner name is attached as the emphasis target; Song is unstarred where applicable.
+assert.equal(cvOf("kang2025hybridserve").highlight, "M. Song")
+assert.ok(cvOf("cheon2025multinode").sub.includes("M. Song,"))
 assert.ok(cvOf("song2023kubevc").sub.endsWith("vol. 18, no. 6, pp. 293–301"))
 assert.ok(cvOf("kim2026ddd").sub.endsWith("Proc. IEEE CLOUD 2026 (To appear)"))
 assert.ok(cvOf("song2026edgeagent").sub.includes("J. G. Son"))
 assert.ok(cvOf("song2025callisto").sub.endsWith("Proc. KCC '25, pp. 617–619"))
 assert.ok(cvOf("song2025costnorm").sub.includes("Annual Conference of KIPS"))
+assert.ok(cvOf("hwang2023spot").sub.endsWith("(Poster)"))
 
 console.log(`OK: ${counts.total} publications (${counts.summary})`)
 console.log(`Sections: ${sections.map((s) => `${s.heading} [${s.years.flatMap((y) => y.items).length}]`).join(", ")}`)

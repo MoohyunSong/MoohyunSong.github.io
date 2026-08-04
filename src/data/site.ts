@@ -1,4 +1,4 @@
-import { CV_PUBLICATIONS_SECTION } from "./publications"
+import { makeCvPublicationsSection } from "./publications"
 
 export const ME = "Moohyun Song"
 
@@ -32,6 +32,8 @@ export interface Project {
   imageAlt?: string
 }
 
+// To add a figure to a project: save the image as public/projects/<name>.png and set
+// image: "/projects/<name>.png" (plus imageAlt) on the entry below.
 export const PROJECTS: Project[] = [
   {
     title: "Callisto",
@@ -45,44 +47,10 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
-    title: "HybridServe",
-    venue: "WOSC11 2025",
-    desc: "Adaptive WebAssembly-container runtime selection for edge serverless computing, cutting cold start latency by 91.9% versus container-only deployments.",
-    links: [{ label: "PAPER", href: "https://doi.org/10.1145/3774899.3775011" }],
-  },
-  {
-    title: "Edge-Cloud MCP Tool Runtimes",
+    title: "EdgeAgent",
     venue: "CCGRID 2026",
     desc: "Orchestrating WASM-based MCP tool runtimes for AI agents across the edge-cloud continuum, placing lightweight tool execution close to where agents need it.",
-    links: [],
-  },
-  {
-    title: "Spot Instance Availability",
-    venue: "IEEE CLOUD 2026 · HPDC 2025",
-    desc: "Peeking into spot instance availability (Ding-Dong Ditch) and a multi-node availability score collection system that extends Spotlake with public datasets.",
-    links: [{ label: "PAPER", href: "https://doi.org/10.1145/3731545.3735122" }],
-  },
-  {
-    title: "KubEVC-Agent",
-    venue: "IEMEK JOURNAL 2023",
-    desc: "Kubernetes edge vision cluster agent for optimal DNN inference and operation on resource-constrained edge devices.",
-    links: [
-      {
-        label: "PAPER",
-        href: "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003027702",
-      },
-    ],
-  },
-  {
-    title: "CostNorm",
-    venue: "KIPS 2025",
-    desc: "LLM-based cloud cost optimization AI agent that analyzes cloud usage and autonomously applies cost-saving actions.",
-    links: [
-      {
-        label: "PAPER",
-        href: "https://koreascience.or.kr/article/CFKO202520950404978.page",
-      },
-    ],
+    links: [{ label: "PAPER", href: "https://ieeexplore.ieee.org/document/11619021" }],
   },
 ]
 
@@ -91,6 +59,8 @@ export interface CvItem {
   title: string
   sub: string
   note?: string
+  /** Substring of `sub` to render emphasized (used for the owner's name in citations). */
+  highlight?: string
 }
 
 export interface CvSection {
@@ -105,7 +75,7 @@ export const CV_SECTIONS: CvSection[] = [
       {
         date: "Mar. 2026 – present",
         title: "Hanyang University",
-        sub: "Ph.D. Student in Artificial Intelligence · Seoul, South Korea",
+        sub: "Ph.D. in Artificial Intelligence · Seoul, South Korea",
       },
       {
         date: "Mar. 2020 – Feb. 2026",
@@ -137,10 +107,16 @@ export const CV_SECTIONS: CvSection[] = [
       },
     ],
   },
-  CV_PUBLICATIONS_SECTION,
+  makeCvPublicationsSection(ME),
   {
     heading: "Honors & Awards",
     items: [
+      {
+        date: "May 2026",
+        title: "CCGrid 2026 Student Travel Grant",
+        sub: "26th IEEE International Symposium on Cluster, Cloud and Internet Computing",
+        note: "Competitive travel grant supported by Western Sydney University, awarded with priority to students presenting accepted papers. Presented a first-author paper at CCGrid 2026 in Sydney, Australia.",
+      },
       {
         date: "Jul. 2025",
         title: "Best Paper Award",
@@ -155,6 +131,12 @@ export const CV_SECTIONS: CvSection[] = [
         date: "Dec. 2023",
         title: "AWS Rookie Championship 2023 — AWS JAM, 1st Place",
         sub: "AWS Korea",
+      },
+      {
+        date: "Oct. 2022",
+        title: "Excellence Award (3rd Place), 4th ROKAF Creative & Innovative Idea Hackathon",
+        sub: "Republic of Korea Air Force · IBK Industrial Bank of Korea",
+        note: "Team OneShot-OneKill — missile defense operations analysis platform using AI and big-data technologies.",
       },
       {
         date: "Aug. 2020",

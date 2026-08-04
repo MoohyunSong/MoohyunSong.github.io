@@ -14,4 +14,8 @@ const entries = parseBibtex(bibSource)
 export const PUBLICATIONS = toPublications(entries)
 export const PUB_COUNTS = countPublications(PUBLICATIONS)
 export const PUB_SECTIONS = groupSections(PUBLICATIONS)
-export const CV_PUBLICATIONS_SECTION = toCvSection(entries, PUBLICATIONS)
+
+/** Called from site.ts with `ME` (avoids a circular import of site.ts here). */
+export function makeCvPublicationsSection(owner: string) {
+  return toCvSection(entries, PUBLICATIONS, owner)
+}

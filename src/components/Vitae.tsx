@@ -1,4 +1,21 @@
+import { Fragment } from "react"
+
 import { CV_SECTIONS } from "@/data/site"
+
+/** Renders `text` with every occurrence of `highlight` emphasized. */
+function HighlightedText({ text, highlight }: { text: string; highlight: string }) {
+  const parts = text.split(highlight)
+  return (
+    <>
+      {parts.map((part, i) => (
+        <Fragment key={i}>
+          {i > 0 && <strong className="font-bold text-foreground">{highlight}</strong>}
+          {part}
+        </Fragment>
+      ))}
+    </>
+  )
+}
 
 export function Vitae() {
   return (
@@ -24,7 +41,13 @@ export function Vitae() {
                     {item.date}
                   </span>
                 </div>
-                <div className="text-[13.5px] text-subtle">{item.sub}</div>
+                <div className="text-[13.5px] text-subtle">
+                  {item.highlight ? (
+                    <HighlightedText text={item.sub} highlight={item.highlight} />
+                  ) : (
+                    item.sub
+                  )}
+                </div>
                 {item.note && (
                   <div className="mt-[3px] text-sm text-body [text-wrap:pretty]">
                     {item.note}

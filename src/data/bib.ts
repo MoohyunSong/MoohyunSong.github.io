@@ -31,6 +31,8 @@ export interface Publication {
   venue: string
   note?: string
   award?: string
+  /** From the custom `category` bib field, comma-separated: "Full Paper", "Short Paper", "Oral", "Poster", ... */
+  categories?: string[]
   link?: string
   scope: Scope
   kind: Kind
@@ -64,6 +66,8 @@ export interface CvPubItem {
   title: string
   sub: string
   note?: string
+  /** Substring of `sub` to visually emphasize (the site owner's abbreviated name). */
+  highlight?: string
 }
 
 export interface CvPubSection {
@@ -150,11 +154,13 @@ function displayAuthor(name: string): string {
   return starred ? `${display}*` : display
 }
 
-/** "Son, Jae Gi" -> "J. G. Son" (equal-contribution markers stripped). */
+/** "Son, Jae Gi" -> "J. G. Son"; "Kang*, Seokhyeon" -> "S. Kang*". */
 function initialsAuthor(name: string): string {
+  const starred = EQUAL_MARKERS.test(name)
+  EQUAL_MARKERS.lastIndex = 0
   const clean = name.replace(EQUAL_MARKERS, "").trim()
   const comma = clean.indexOf(",")
-  if (comma === -1) return clean
+  if (comma === -1) return starred ? `${clean}*` : clean
   const last = clean.slice(0, comma).trim()
   const initials = clean
     .slice(comma + 1)
@@ -162,7 +168,18 @@ function initialsAuthor(name: string): string {
     .split(/\s+/)
     .map((token) => `${token[0].toUpperCase()}.`)
     .join(" ")
-  return `${initials} ${last}`
+  return starred ? `${initials} ${last}*` : `${initials} ${last}`
+}
+
+/** "Moohyun Song" -> "M. Song", for highlighting the owner in CV citations. */
+function abbreviateOwner(displayName: string): string {
+  const tokens = displayName.trim().split(/\s+/)
+  if (tokens.length < 2) return displayName
+  const initials = tokens
+    .slice(0, -1)
+    .map((token) => `${token[0].toUpperCase()}.`)
+    .join(" ")
+  return `${initials} ${tokens[tokens.length - 1]}`
 }
 
 /** Oxford-comma author list: "A", "A and B", "A, B, and C". */
@@ -176,11 +193,11 @@ function splitAuthors(field: string): string[] {
   return field.split(/\s+and\s+/).map((name) => name.trim())
 }
 
-/** Display venue for the Publications section. */
+/** Display venue for the Publications section: the conference name itself. */
 function displayVenue(entry: BibEntry, kind: Kind): string {
   const f = entry.fields
   if (kind === "journal") return cleanBraces(f.journal ?? "")
-  let base = cleanBraces(f.booktitle ?? "")
+  let base = cleanBraces(f.booktitle ?? "").replace(/^proceedings of (the )?/i, "")
   // Append the series abbreviation unless the booktitle already ends with one,
   // e.g. "... Cloud Computing (CLOUD)" must not become "... (CLOUD) (IEEE CLOUD 2026)".
   if (f.series && !/\([^)]*\)\s*$/.test(base)) base += ` (${f.series})`
@@ -234,6 +251,9 @@ export function toPublications(entries: BibEntry[]): Publication[] {
       venue: displayVenue(entry, kind),
       note: f.note || undefined,
       award: f.award || undefined,
+      categories: f.category
+        ? f.category.split(",").map((c) => c.trim()).filter(Boolean)
+        : undefined,
       link: f.html ?? f.url ?? (f.doi ? `https://doi.org/${f.doi}` : undefined),
       scope,
       kind,
@@ -287,17 +307,28 @@ export function groupSections(pubs: Publication[]): PubSection[] {
     .filter((section) => section.years.length > 0)
 }
 
-/** The auto-generated "Publications" section of the CV, one item per paper. */
-export function toCvSection(entries: BibEntry[], pubs: Publication[]): CvPubSection {
+/**
+ * The auto-generated "Publications" section of the CV, one item per paper.
+ * `owner` is the site owner's display name ("Moohyun Song"); when given, its
+ * abbreviated form is attached as `highlight` for emphasis in the author list.
+ */
+export function toCvSection(
+  entries: BibEntry[],
+  pubs: Publication[],
+  owner?: string,
+): CvPubSection {
   const byKey = new Map(entries.map((entry) => [entry.key, entry]))
+  const highlight = owner ? abbreviateOwner(owner) : undefined
   return {
     heading: "Publications",
     items: pubs.map((pub) => {
       const entry = byKey.get(pub.key)!
+      const categories = pub.categories?.length ? ` (${pub.categories.join(", ")})` : ""
       return {
         date: pub.year,
         title: pub.title,
-        sub: `${joinAuthors(splitAuthors(entry.fields.author ?? "").map(initialsAuthor))} · ${cvVenue(entry, pub.kind)}`,
+        sub: `${joinAuthors(splitAuthors(entry.fields.author ?? "").map(initialsAuthor))} · ${cvVenue(entry, pub.kind)}${categories}`,
+        highlight,
       }
     }),
   }

@@ -34,6 +34,10 @@ on save).
 - Equal contribution: append `*` to each equal author's LAST name in the bib
   (`Song*, Moohyun`); it renders as a trailing `*` on the displayed name.
 - Award badge: add `award={Best Paper Award}` to show a ★ badge on the entry.
+- Paper/presentation type: Oral + Full Paper is the assumed default and gets NO badge.
+  Mark only the exceptions with `category={Poster}` or `category={Short Paper}`
+  (comma-separate if both apply). Each value renders as a gray badge and the set is
+  appended to the CV citation line, e.g. "(Poster)".
 - Link resolution for the PAPER button: `html` > `url` > `doi` (no link → no button).
 - `note={To appear}` renders as an italic note next to the venue and in the CV line.
 - Venue display: `booktitle`, plus ` ({series})` appended unless the booktitle already
