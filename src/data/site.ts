@@ -40,6 +40,8 @@ export const PROJECTS: Project[] = [
     venue: "CCGRID 2026",
     desc: "Orchestrating WASM-based MCP tool runtimes for AI agents across the edge-cloud continuum, placing lightweight tool execution close to where agents need it.",
     links: [{ label: "PAPER", href: "https://ieeexplore.ieee.org/document/11619021" }],
+    image: "/projects/edgeagent.png",
+    imageAlt: "EdgeAgent system architecture",
   },
   {
     title: "Callisto",
@@ -51,6 +53,8 @@ export const PROJECTS: Project[] = [
         href: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE12318265",
       },
     ],
+    image: "/projects/callisto.png",
+    imageAlt: "Callisto system architecture",
   },
 ]
 
