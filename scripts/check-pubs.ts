@@ -7,6 +7,7 @@ import {
   countPublications,
   groupSections,
   parseBibtex,
+  selectedPublications,
   toCvSection,
   toPublications,
 } from "../src/data/bib.ts"
@@ -96,11 +97,10 @@ assert.equal(byKey("song2026edgeagent").categories, undefined)
 assert.deepEqual(byKey("cheon2025multinode").categories, ["Poster"])
 assert.deepEqual(byKey("hwang2023spot").categories, ["Poster"])
 
-// Selected: `selected={rank}` duplicates entries into a leading Selected
-// section, rank-ordered; they still appear in their regular sections.
-assert.equal(sections[0].heading, "Selected")
+// Selected: `selected={rank}` feeds the standalone Selected Publications
+// section in pure rank order; entries still appear in their regular sections.
 assert.deepEqual(
-  sections[0].years.flatMap((y) => y.items).map((p) => p.key),
+  selectedPublications(pubs).map((p) => p.key),
   ["song2026edgeagent", "jeong2026shuntserve", "kim2026ddd"],
 )
 assert.ok(
@@ -116,8 +116,8 @@ assert.equal(spotvista.venue, "arXiv preprint arXiv:2604.24548")
 assert.equal(spotvista.link, undefined)
 assert.equal(spotvista.arxivLink, "https://arxiv.org/abs/2604.24548")
 assert.equal(spotvista.note, undefined)
-assert.equal(sections[1].heading, "Preprint")
-assert.equal(sections[1].years.flatMap((y) => y.items).length, 1)
+assert.equal(sections[0].heading, "Preprint")
+assert.equal(sections[0].years.flatMap((y) => y.items).length, 1)
 
 // Accepted @article + international -> International Journal section. The PAPER
 // button (html/url/doi) and the ARXIV button are independent: no publisher link
@@ -129,7 +129,7 @@ assert.equal(shuntserve.venue, "Future Generation Computer Systems (FGCS)")
 assert.equal(shuntserve.link, undefined)
 assert.equal(shuntserve.arxivLink, "https://arxiv.org/abs/2606.18600")
 assert.equal(shuntserve.note, "To appear")
-assert.equal(sections[2].heading, "International Journal")
+assert.equal(sections[1].heading, "International Journal")
 assert.equal(counts.internationalJournal, 1)
 
 // Section grouping: no empty sections, year-descending inside each.

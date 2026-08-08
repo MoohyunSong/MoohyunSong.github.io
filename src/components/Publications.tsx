@@ -31,7 +31,7 @@ function LinkButton({ href, label }: { href: string; label: string }) {
   )
 }
 
-function PublicationItem({ pub }: { pub: Publication }) {
+export function PublicationItem({ pub }: { pub: Publication }) {
   return (
     <div className="flex flex-col gap-[5px] py-4">
       <div className="text-[16.5px] leading-[1.4] font-bold [text-wrap:pretty]">

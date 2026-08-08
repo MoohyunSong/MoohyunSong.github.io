@@ -321,20 +321,22 @@ export function groupSections(pubs: Publication[]): PubSection[] {
     ["Domestic Journal", "domestic", "journal"],
     ["Domestic Conference", "domestic", "conference"],
   ]
-  const sections = order
+  return order
     .map(([heading, scope, kind]) => ({
       heading,
       years: groupByYear(pubs.filter((p) => p.scope === scope && p.kind === kind)),
     }))
     .filter((section) => section.years.length > 0)
-  // Curated highlights, duplicated from their regular sections: newest year
-  // first, `selected` rank order within a year.
-  const selected = pubs
+}
+
+/**
+ * Curated list for the standalone "Selected Publications" section, in pure
+ * `selected` rank order (no year grouping); entries keep their regular section.
+ */
+export function selectedPublications(pubs: Publication[]): Publication[] {
+  return pubs
     .filter((p) => p.selected !== undefined)
-    .sort((a, b) => Number(b.year) - Number(a.year) || a.selected! - b.selected!)
-  if (selected.length > 0)
-    sections.unshift({ heading: "Selected", years: groupByYear(selected) })
-  return sections
+    .sort((a, b) => a.selected! - b.selected!)
 }
 
 /**

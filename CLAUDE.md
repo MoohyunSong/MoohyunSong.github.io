@@ -37,9 +37,10 @@ on save).
 - Equal contribution: append `*` to each equal author's LAST name in the bib
   (`Song*, Moohyun`); it renders as a trailing `*` on the displayed name.
 - Award badge: add `award={Best Paper Award}` to show a ★ badge on the entry.
-- Selected publications: `selected={1}` (rank; lower shows first within a year) puts a
-  copy of the entry in a "Selected" section rendered above all other sections; the
-  entry still appears in its regular section.
+- Selected publications: `selected={1}` (rank; lower shows first) puts a copy of the
+  entry in the standalone "Selected Publications" section rendered above the
+  Publications section, without year grouping; the entry still appears in its regular
+  section.
 - Paper/presentation type: Oral + Full Paper is the assumed default and gets NO badge.
   Mark only the exceptions with `category={Poster}` or `category={Short Paper}`
   (comma-separate if both apply). Each value renders as a gray badge and the set is
