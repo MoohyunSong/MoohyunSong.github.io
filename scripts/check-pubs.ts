@@ -101,7 +101,7 @@ assert.deepEqual(byKey("hwang2023spot").categories, ["Poster"])
 assert.equal(sections[0].heading, "Selected")
 assert.deepEqual(
   sections[0].years.flatMap((y) => y.items).map((p) => p.key),
-  ["jeong2026shuntserve", "song2026edgeagent", "kim2026ddd"],
+  ["song2026edgeagent", "jeong2026shuntserve", "kim2026ddd"],
 )
 assert.ok(
   sections
