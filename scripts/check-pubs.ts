@@ -146,11 +146,12 @@ assert.ok(cvOf("song2025callisto").sub.endsWith("KCC '25, pp. 617–619"))
 assert.ok(cvOf("song2025costnorm").sub.includes("Annual Conference of KIPS"))
 assert.ok(cvOf("hwang2023spot").sub.endsWith("(Poster)"))
 assert.ok(
-  cvOf("kim2026spotvista").sub.endsWith("arXiv preprint arXiv:2604.24548 (Under review)"),
-)
-assert.ok(
   cvOf("jeong2026shuntserve").sub.endsWith("Future Generation Computer Systems (FGCS) (To appear)"),
 )
+
+// Under-review preprints appear on the site but stay out of the CV list.
+assert.equal(cv.items.length, counts.total)
+assert.ok(!cv.items.some((item) => item.title === spotvista.title))
 
 console.log(
   `OK: ${counts.total} publications (${counts.summary}) + ${counts.preprints} under review`,

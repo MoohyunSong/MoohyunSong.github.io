@@ -331,7 +331,8 @@ export function groupSections(pubs: Publication[]): PubSection[] {
 }
 
 /**
- * The auto-generated "Publications" section of the CV, one item per paper.
+ * The auto-generated "Publications" section of the CV, one item per published
+ * paper (under-review preprints stay out of the CV, like the counts).
  * `owner` is the site owner's display name ("Moohyun Song"); when given, its
  * abbreviated form is attached as `highlight` for emphasis in the author list.
  */
@@ -344,7 +345,7 @@ export function toCvSection(
   const highlight = owner ? abbreviateOwner(owner) : undefined
   return {
     heading: "Publications",
-    items: pubs.map((pub) => {
+    items: pubs.filter((pub) => pub.scope !== "preprint").map((pub) => {
       const entry = byKey.get(pub.key)!
       const categories = pub.categories?.length ? ` (${pub.categories.join(", ")})` : ""
       return {

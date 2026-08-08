@@ -28,7 +28,8 @@ on save).
 - Type: `@inproceedings` for conferences, `@article` for journals, `@misc` +
   `keywords={preprint}` + `arxiv={2606.18600}` + `note={Under review}` for under-review
   preprints (rendered in an "Under Review" section first, linked to arXiv, and NOT
-  counted in the publications total; move to `@inproceedings`/`@article` on acceptance).
+  counted in the publications total nor listed in the CV publication list; move to
+  `@inproceedings`/`@article` on acceptance).
 - Citation key convention: `{lastname}{year}{shortname}`, e.g. `song2026mcptool`.
 - `keywords={international}` or `keywords={domestic}` is REQUIRED — it decides the
   section (type × scope, e.g. `@inproceedings` + `international` → "International
