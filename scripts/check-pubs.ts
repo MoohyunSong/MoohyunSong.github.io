@@ -154,13 +154,14 @@ assert.equal(
 assert.equal(cvOf("kang2025hybridserve").highlight, "M. Song")
 assert.ok(cvOf("cheon2025multinode").sub.includes("M. Song,"))
 assert.ok(cvOf("song2023kubevc").sub.endsWith("vol. 18, no. 6, pp. 293–301"))
-assert.ok(cvOf("kim2026ddd").sub.endsWith("IEEE CLOUD 2026 (To appear)"))
+// Notes like "To appear" stay out of CV citations.
+assert.ok(cvOf("kim2026ddd").sub.endsWith("IEEE CLOUD 2026"))
 assert.ok(cvOf("song2026edgeagent").sub.includes("J. G. Son"))
 assert.ok(cvOf("song2025callisto").sub.endsWith("KCC '25, pp. 617–619"))
 assert.ok(cvOf("song2025costnorm").sub.includes("Annual Conference of KIPS"))
 assert.ok(cvOf("hwang2023spot").sub.endsWith("(Poster)"))
 assert.ok(
-  cvOf("jeong2026shuntserve").sub.endsWith("Future Generation Computer Systems (FGCS) (To appear)"),
+  cvOf("jeong2026shuntserve").sub.endsWith("Future Generation Computer Systems (FGCS)"),
 )
 
 // Preprints appear on the site but stay out of the CV list.

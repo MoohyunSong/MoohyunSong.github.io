@@ -48,7 +48,8 @@ on save).
 - Link buttons: PAPER resolves `html` > `url` > `doi` (none → no PAPER button); an
   `arxiv` field adds an independent ARXIV button. An accepted paper with both a
   publisher link and an arXiv id shows both buttons side by side.
-- `note={To appear}` renders as an italic note next to the venue and in the CV line.
+- `note={To appear}` renders as an italic note next to the venue on the site; notes are
+  NOT appended to CV citation lines.
 - Venue display: `booktitle` (minus any "Proceedings of the" prefix), plus ` ({series})`
   appended unless the booktitle already ends with a parenthesized abbreviation. CV
   citation uses the compact form (`{series}` / `{ABBR} '{yy}` / full booktitle;

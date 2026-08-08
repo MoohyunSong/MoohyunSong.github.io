@@ -211,14 +211,13 @@ function displayVenue(entry: BibEntry, kind: Kind): string {
   return base
 }
 
-/** Compact venue for the CV citation line, following the old cv-publications.rb rules. */
+/** Compact venue for the CV citation line, following the old cv-publications.rb rules.
+ * Notes like "To appear" show on the site only, not in the CV citation. */
 function cvVenue(entry: BibEntry, kind: Kind): string {
   const f = entry.fields
   let venue: string
   if (kind === "preprint") {
-    venue = f.arxiv ? `arXiv preprint arXiv:${f.arxiv}` : cleanBraces(f.howpublished ?? "Preprint")
-    if (f.note) venue += ` (${f.note})`
-    return venue
+    return f.arxiv ? `arXiv preprint arXiv:${f.arxiv}` : cleanBraces(f.howpublished ?? "Preprint")
   }
   if (kind === "journal") {
     venue = cleanBraces(f.journal ?? "")
@@ -232,7 +231,6 @@ function cvVenue(entry: BibEntry, kind: Kind): string {
     else venue = book
   }
   if (f.pages) venue += `, pp. ${displayPages(f.pages)}`
-  if (f.note) venue += ` (${f.note})`
   return venue
 }
 
