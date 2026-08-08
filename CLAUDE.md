@@ -34,8 +34,10 @@ on save).
   section (type × scope, e.g. `@inproceedings` + `international` → "International
   Conference") and the counts header. Entries missing it are silently dropped
   (`npm run check:pubs` warns).
-- Equal contribution: append `*` to each equal author's LAST name in the bib
-  (`Song*, Moohyun`); it renders as a trailing `*` on the displayed name.
+- Author markers, appended to the LAST name in the bib: `*` for each equal-contribution
+  author (`Song*, Moohyun`), `†` for the corresponding author (`Lee†, Kyungyong`). They
+  render as trailing markers on the displayed name and in CV citations; the legend
+  lives under the Publications header.
 - Award badge: add `award={Best Paper Award}` to show a ★ badge on the entry.
 - Selected publications: `selected={1}` (rank; lower shows first) puts a copy of the
   entry in the standalone "Selected Publications" section rendered above the

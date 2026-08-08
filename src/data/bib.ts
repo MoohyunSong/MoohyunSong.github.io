@@ -26,7 +26,7 @@ export interface Publication {
   key: string
   year: string
   title: string
-  /** "First Last" names; a trailing `*` marks equal contribution. */
+  /** "First Last" names; a trailing `*` marks equal contribution, `†` the corresponding author. */
   authors: string[]
   venue: string
   note?: string
@@ -142,30 +142,32 @@ export function parseBibtex(src: string): BibEntry[] {
   return entries
 }
 
-const EQUAL_MARKERS = /[*†‡§¶‖]/g
+/** Markers carried on the bib LAST name: `*` equal contribution, `†` corresponding author. */
+const AUTHOR_MARKERS = /[*†]/g
 const cleanBraces = (s: string) => s.replace(/[{}]/g, "")
 const displayPages = (pages: string) => pages.replace(/--/g, "–")
 
-/** "Song, Moohyun" -> "Moohyun Song"; "Kang*, Seokhyeon" -> "Seokhyeon Kang*". */
+function splitMarkers(name: string): { clean: string; markers: string } {
+  const markers = (name.match(AUTHOR_MARKERS) ?? []).join("")
+  return { clean: name.replace(AUTHOR_MARKERS, "").trim(), markers }
+}
+
+/** "Song, Moohyun" -> "Moohyun Song"; "Kang*, Seokhyeon" -> "Seokhyeon Kang*"; "Lee†, Kyungyong" -> "Kyungyong Lee†". */
 function displayAuthor(name: string): string {
-  const starred = EQUAL_MARKERS.test(name)
-  EQUAL_MARKERS.lastIndex = 0
-  const clean = name.replace(EQUAL_MARKERS, "").trim()
+  const { clean, markers } = splitMarkers(name)
   const comma = clean.indexOf(",")
   const display =
     comma === -1
       ? clean
       : `${clean.slice(comma + 1).trim()} ${clean.slice(0, comma).trim()}`
-  return starred ? `${display}*` : display
+  return display + markers
 }
 
-/** "Son, Jae Gi" -> "J. G. Son"; "Kang*, Seokhyeon" -> "S. Kang*". */
+/** "Son, Jae Gi" -> "J. G. Son"; "Kang*, Seokhyeon" -> "S. Kang*"; "Lee†, Kyungyong" -> "K. Lee†". */
 function initialsAuthor(name: string): string {
-  const starred = EQUAL_MARKERS.test(name)
-  EQUAL_MARKERS.lastIndex = 0
-  const clean = name.replace(EQUAL_MARKERS, "").trim()
+  const { clean, markers } = splitMarkers(name)
   const comma = clean.indexOf(",")
-  if (comma === -1) return starred ? `${clean}*` : clean
+  if (comma === -1) return clean + markers
   const last = clean.slice(0, comma).trim()
   const initials = clean
     .slice(comma + 1)
@@ -173,7 +175,7 @@ function initialsAuthor(name: string): string {
     .split(/\s+/)
     .map((token) => `${token[0].toUpperCase()}.`)
     .join(" ")
-  return starred ? `${initials} ${last}*` : `${initials} ${last}`
+  return `${initials} ${last}${markers}`
 }
 
 /** "Moohyun Song" -> "M. Song", for highlighting the owner in CV citations. */

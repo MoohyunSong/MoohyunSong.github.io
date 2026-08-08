@@ -6,7 +6,7 @@ function AuthorList({ authors }: { authors: string[] }) {
   return (
     <div className="text-[13.5px] text-subtle">
       {authors.map((name, i) => {
-        const isMe = name.replace("*", "") === ME
+        const isMe = name.replace(/[*†]/g, "") === ME
         return (
           <span key={name} className={isMe ? "font-bold text-foreground" : undefined}>
             {name}
@@ -73,7 +73,9 @@ export function Publications() {
         </strong>
         {PUB_COUNTS.summary && <> ({PUB_COUNTS.summary})</>}
       </p>
-      <p className="mb-9 text-xs font-medium text-muted-foreground">* equal contribution</p>
+      <p className="mb-9 text-xs font-medium text-muted-foreground">
+        * equal contribution, † corresponding author
+      </p>
 
       {PUB_SECTIONS.map((section) => (
         <div key={section.heading} className="mb-10 last:mb-0">

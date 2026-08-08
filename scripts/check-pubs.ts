@@ -60,6 +60,13 @@ const multinode = byKey("cheon2025multinode")
 assert.equal(multinode.authors[0], "Sungkyu Cheon*")
 assert.ok(multinode.authors.includes("Moohyun Song"))
 
+// Corresponding authors carry a trailing dagger, kept separate from `*`.
+assert.equal(hybridserve.authors.at(-1), "Kyungyong Lee†")
+const mlpipeline = byKey("song2024mlpipeline")
+assert.equal(mlpipeline.authors[0], "Moohyun Song†")
+assert.equal(mlpipeline.authors[1], "Seungwoo Jeong")
+assert.equal(byKey("song2025costnorm").authors.at(-1), "Jangho Kim†")
+
 // Entries without html/url/doi get no link; note carries "To appear".
 const ddd = byKey("kim2026ddd")
 assert.equal(ddd.link, undefined)
@@ -148,7 +155,7 @@ const cvOf = (key: string) => {
 }
 assert.equal(
   cvOf("kang2025hybridserve").sub,
-  "S. Kang*, M. Song*, T. Kim*, S. Lee, J. Han, H. Kim, and K. Lee · WoSC11 '25, pp. 1–6",
+  "S. Kang*, M. Song*, T. Kim*, S. Lee, J. Han, H. Kim, and K. Lee† · WoSC11 '25, pp. 1–6",
 )
 // Owner name is attached as the emphasis target; Song is unstarred where applicable.
 assert.equal(cvOf("kang2025hybridserve").highlight, "M. Song")
