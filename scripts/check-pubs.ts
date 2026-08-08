@@ -52,6 +52,7 @@ const hybridserve = byKey("kang2025hybridserve")
 assert.equal(hybridserve.authors[0], "Seokhyeon Kang*")
 assert.equal(hybridserve.authors[1], "Moohyun Song*")
 assert.equal(hybridserve.link, "https://doi.org/10.1145/3774899.3775011")
+assert.equal(hybridserve.arxivLink, undefined)
 
 // Song is NOT starred here even though co-authors are.
 const multinode = byKey("cheon2025multinode")
@@ -95,21 +96,24 @@ assert.equal(byKey("song2026edgeagent").categories, undefined)
 assert.deepEqual(byKey("cheon2025multinode").categories, ["Poster"])
 assert.deepEqual(byKey("hwang2023spot").categories, ["Poster"])
 
-// Preprints: keywords={preprint} + arxiv={...} -> Under Review section, arXiv link.
+// Preprints: keywords={preprint} + arxiv={...} -> Under Review section, ARXIV button.
 const spotvista = byKey("kim2026spotvista")
 assert.equal(spotvista.venue, "arXiv preprint arXiv:2604.24548")
-assert.equal(spotvista.link, "https://arxiv.org/abs/2604.24548")
+assert.equal(spotvista.link, undefined)
+assert.equal(spotvista.arxivLink, "https://arxiv.org/abs/2604.24548")
 assert.equal(spotvista.note, "Under review")
 assert.equal(sections[0].heading, "Under Review")
 assert.equal(sections[0].years.flatMap((y) => y.items).length, 1)
 
-// Accepted @article + international -> International Journal section; the arXiv
-// link survives as the PAPER button fallback (no html/url/doi yet).
+// Accepted @article + international -> International Journal section. The PAPER
+// button (html/url/doi) and the ARXIV button are independent: no publisher link
+// yet, but the arXiv one stays.
 const shuntserve = byKey("jeong2026shuntserve")
 assert.equal(shuntserve.kind, "journal")
 assert.equal(shuntserve.scope, "international")
 assert.equal(shuntserve.venue, "Future Generation Computer Systems (FGCS)")
-assert.equal(shuntserve.link, "https://arxiv.org/abs/2606.18600")
+assert.equal(shuntserve.link, undefined)
+assert.equal(shuntserve.arxivLink, "https://arxiv.org/abs/2606.18600")
 assert.equal(shuntserve.note, "To appear")
 assert.equal(sections[1].heading, "International Journal")
 assert.equal(counts.internationalJournal, 1)

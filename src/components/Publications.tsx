@@ -18,6 +18,19 @@ function AuthorList({ authors }: { authors: string[] }) {
   )
 }
 
+function LinkButton({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="rounded-md border border-primary-border px-2.5 py-[3px] text-[11px] font-semibold tracking-[0.04em] text-primary transition-colors hover:bg-accent"
+    >
+      {label} ↗
+    </a>
+  )
+}
+
 function PublicationItem({ pub }: { pub: Publication }) {
   return (
     <div className="flex flex-col gap-[5px] py-4">
@@ -43,16 +56,8 @@ function PublicationItem({ pub }: { pub: Publication }) {
             ★ {pub.award}
           </Badge>
         )}
-        {pub.link && (
-          <a
-            href={pub.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-md border border-primary-border px-2.5 py-[3px] text-[11px] font-semibold tracking-[0.04em] text-primary transition-colors hover:bg-accent"
-          >
-            PAPER ↗
-          </a>
-        )}
+        {pub.link && <LinkButton href={pub.link} label="PAPER" />}
+        {pub.arxivLink && <LinkButton href={pub.arxivLink} label="ARXIV" />}
       </div>
     </div>
   )

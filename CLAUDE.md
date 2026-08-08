@@ -41,7 +41,9 @@ on save).
   Mark only the exceptions with `category={Poster}` or `category={Short Paper}`
   (comma-separate if both apply). Each value renders as a gray badge and the set is
   appended to the CV citation line, e.g. "(Poster)".
-- Link resolution for the PAPER button: `html` > `url` > `doi` (no link → no button).
+- Link buttons: PAPER resolves `html` > `url` > `doi` (none → no PAPER button); an
+  `arxiv` field adds an independent ARXIV button. An accepted paper with both a
+  publisher link and an arXiv id shows both buttons side by side.
 - `note={To appear}` renders as an italic note next to the venue and in the CV line.
 - Venue display: `booktitle` (minus any "Proceedings of the" prefix), plus ` ({series})`
   appended unless the booktitle already ends with a parenthesized abbreviation. CV

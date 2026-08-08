@@ -33,7 +33,10 @@ export interface Publication {
   award?: string
   /** From the custom `category` bib field, comma-separated: "Full Paper", "Short Paper", "Oral", "Poster", ... */
   categories?: string[]
+  /** Publisher link for the PAPER button: html > url > doi. */
   link?: string
+  /** arXiv abs link for the ARXIV button, present whenever the entry has `arxiv`. */
+  arxivLink?: string
   scope: Scope
   kind: Kind
   bibtex: string
@@ -270,11 +273,8 @@ export function toPublications(entries: BibEntry[]): Publication[] {
       categories: f.category
         ? f.category.split(",").map((c) => c.trim()).filter(Boolean)
         : undefined,
-      link:
-        f.html ??
-        f.url ??
-        (f.doi ? `https://doi.org/${f.doi}` : undefined) ??
-        (f.arxiv ? `https://arxiv.org/abs/${f.arxiv}` : undefined),
+      link: f.html ?? f.url ?? (f.doi ? `https://doi.org/${f.doi}` : undefined),
+      arxivLink: f.arxiv ? `https://arxiv.org/abs/${f.arxiv}` : undefined,
       scope,
       kind,
       bibtex: entry.raw,
