@@ -164,7 +164,7 @@ assert.ok(cvOf("song2023kubevc").sub.endsWith("vol. 18, no. 6, pp. 293–301"))
 // CV citations carry no author markers at all.
 assert.ok(cv.items.every((item) => !/[*†]/.test(item.sub)))
 // Notes like "To appear" stay out of CV citations.
-assert.ok(cvOf("kim2026ddd").sub.endsWith("IEEE CLOUD 2026"))
+assert.ok(cvOf("kim2026ddd").sub.endsWith("· CLOUD 2026"))
 assert.ok(cvOf("song2026edgeagent").sub.includes("J. G. Son"))
 assert.ok(cvOf("song2025callisto").sub.endsWith("KCC '25, pp. 617–619"))
 assert.ok(cvOf("song2025costnorm").sub.includes("Annual Conference of KIPS"))
