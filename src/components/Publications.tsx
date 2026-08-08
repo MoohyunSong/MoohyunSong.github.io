@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { PUB_COUNTS, PUB_SECTIONS, type Publication } from "@/data/publications"
 import { ME } from "@/data/site"
+import { withSupDaggers } from "@/lib/daggers"
 
 function AuthorList({ authors }: { authors: string[] }) {
   return (
@@ -9,7 +10,7 @@ function AuthorList({ authors }: { authors: string[] }) {
         const isMe = name.replace(/[*†]/g, "") === ME
         return (
           <span key={name} className={isMe ? "font-bold text-foreground" : undefined}>
-            {name}
+            {withSupDaggers(name)}
             {i < authors.length - 1 ? ", " : ""}
           </span>
         )
@@ -74,7 +75,7 @@ export function Publications() {
         {PUB_COUNTS.summary && <> ({PUB_COUNTS.summary})</>}
       </p>
       <p className="mb-9 text-xs font-medium text-muted-foreground">
-        * equal contribution, † corresponding author
+        {withSupDaggers("* equal contribution, † corresponding author")}
       </p>
 
       {PUB_SECTIONS.map((section) => (
