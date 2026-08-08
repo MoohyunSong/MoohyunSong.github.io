@@ -69,7 +69,7 @@ assert.equal(
   "https://ieeexplore.ieee.org/document/11619021",
 )
 
-// The only journal entry lands in the Domestic Journal section.
+// Journal entries: venue comes straight from the `journal` field.
 const kubevc = byKey("song2023kubevc")
 assert.equal(kubevc.kind, "journal")
 assert.equal(kubevc.venue, "IEMEK Journal of Embedded Systems and Applications")
@@ -96,12 +96,23 @@ assert.deepEqual(byKey("cheon2025multinode").categories, ["Poster"])
 assert.deepEqual(byKey("hwang2023spot").categories, ["Poster"])
 
 // Preprints: keywords={preprint} + arxiv={...} -> Under Review section, arXiv link.
-const shuntserve = byKey("jeong2026shuntserve")
-assert.equal(shuntserve.venue, "arXiv preprint arXiv:2606.18600")
-assert.equal(shuntserve.link, "https://arxiv.org/abs/2606.18600")
-assert.equal(shuntserve.note, "Under review")
+const spotvista = byKey("kim2026spotvista")
+assert.equal(spotvista.venue, "arXiv preprint arXiv:2604.24548")
+assert.equal(spotvista.link, "https://arxiv.org/abs/2604.24548")
+assert.equal(spotvista.note, "Under review")
 assert.equal(sections[0].heading, "Under Review")
-assert.equal(sections[0].years.flatMap((y) => y.items).length, 2)
+assert.equal(sections[0].years.flatMap((y) => y.items).length, 1)
+
+// Accepted @article + international -> International Journal section; the arXiv
+// link survives as the PAPER button fallback (no html/url/doi yet).
+const shuntserve = byKey("jeong2026shuntserve")
+assert.equal(shuntserve.kind, "journal")
+assert.equal(shuntserve.scope, "international")
+assert.equal(shuntserve.venue, "Future Generation Computer Systems (FGCS)")
+assert.equal(shuntserve.link, "https://arxiv.org/abs/2606.18600")
+assert.equal(shuntserve.note, "To appear")
+assert.equal(sections[1].heading, "International Journal")
+assert.equal(counts.internationalJournal, 1)
 
 // Section grouping: no empty sections, year-descending inside each.
 for (const section of sections) {
@@ -132,6 +143,9 @@ assert.ok(cvOf("song2025costnorm").sub.includes("Annual Conference of KIPS"))
 assert.ok(cvOf("hwang2023spot").sub.endsWith("(Poster)"))
 assert.ok(
   cvOf("kim2026spotvista").sub.endsWith("arXiv preprint arXiv:2604.24548 (Under review)"),
+)
+assert.ok(
+  cvOf("jeong2026shuntserve").sub.endsWith("Future Generation Computer Systems (FGCS) (To appear)"),
 )
 
 console.log(
