@@ -36,8 +36,8 @@ on save).
   (`npm run check:pubs` warns).
 - Author markers, appended to the LAST name in the bib: `*` for each equal-contribution
   author (`Song*, Moohyun`), `†` for the corresponding author (`Lee†, Kyungyong`). They
-  render as trailing markers on the displayed name and in CV citations; the legend
-  lives under the Publications header.
+  render as trailing markers on the displayed name (`†` as a slight superscript; legend
+  under the Publications header). CV citation lines drop both markers.
 - Award badge: add `award={Best Paper Award}` to show a ★ badge on the entry.
 - Selected publications: `selected={1}` (rank; lower shows first) puts a copy of the
   entry in the standalone "Selected Publications" section rendered above the

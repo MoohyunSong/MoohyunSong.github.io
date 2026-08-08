@@ -1,7 +1,6 @@
 import { Fragment } from "react"
 
 import { CV_SECTIONS } from "@/data/site"
-import { withSupDaggers } from "@/lib/daggers"
 
 /** Renders `text` with every occurrence of `highlight` emphasized. */
 function HighlightedText({ text, highlight }: { text: string; highlight: string }) {
@@ -11,7 +10,7 @@ function HighlightedText({ text, highlight }: { text: string; highlight: string 
       {parts.map((part, i) => (
         <Fragment key={i}>
           {i > 0 && <strong className="font-bold text-foreground">{highlight}</strong>}
-          {withSupDaggers(part)}
+          {part}
         </Fragment>
       ))}
     </>

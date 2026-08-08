@@ -163,11 +163,12 @@ function displayAuthor(name: string): string {
   return display + markers
 }
 
-/** "Son, Jae Gi" -> "J. G. Son"; "Kang*, Seokhyeon" -> "S. Kang*"; "Lee†, Kyungyong" -> "K. Lee†". */
+/** "Son, Jae Gi" -> "J. G. Son". CV citations drop the `*`/`†` author markers
+ * entirely ("Kang*, Seokhyeon" -> "S. Kang", "Lee†, Kyungyong" -> "K. Lee"). */
 function initialsAuthor(name: string): string {
-  const { clean, markers } = splitMarkers(name)
+  const { clean } = splitMarkers(name)
   const comma = clean.indexOf(",")
-  if (comma === -1) return clean + markers
+  if (comma === -1) return clean
   const last = clean.slice(0, comma).trim()
   const initials = clean
     .slice(comma + 1)
@@ -175,7 +176,7 @@ function initialsAuthor(name: string): string {
     .split(/\s+/)
     .map((token) => `${token[0].toUpperCase()}.`)
     .join(" ")
-  return `${initials} ${last}${markers}`
+  return `${initials} ${last}`
 }
 
 /** "Moohyun Song" -> "M. Song", for highlighting the owner in CV citations. */
