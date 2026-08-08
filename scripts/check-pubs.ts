@@ -96,14 +96,28 @@ assert.equal(byKey("song2026edgeagent").categories, undefined)
 assert.deepEqual(byKey("cheon2025multinode").categories, ["Poster"])
 assert.deepEqual(byKey("hwang2023spot").categories, ["Poster"])
 
-// Preprints: keywords={preprint} + arxiv={...} -> Under Review section, ARXIV button.
+// Selected: `selected={rank}` duplicates entries into a leading Selected
+// section, rank-ordered; they still appear in their regular sections.
+assert.equal(sections[0].heading, "Selected")
+assert.deepEqual(
+  sections[0].years.flatMap((y) => y.items).map((p) => p.key),
+  ["jeong2026shuntserve", "song2026edgeagent", "kim2026ddd"],
+)
+assert.ok(
+  sections
+    .find((s) => s.heading === "International Conference")!
+    .years.flatMap((y) => y.items)
+    .some((p) => p.key === "song2026edgeagent"),
+)
+
+// Preprints: keywords={preprint} + arxiv={...} -> Preprint section, ARXIV button.
 const spotvista = byKey("kim2026spotvista")
 assert.equal(spotvista.venue, "arXiv preprint arXiv:2604.24548")
 assert.equal(spotvista.link, undefined)
 assert.equal(spotvista.arxivLink, "https://arxiv.org/abs/2604.24548")
-assert.equal(spotvista.note, "Under review")
-assert.equal(sections[0].heading, "Under Review")
-assert.equal(sections[0].years.flatMap((y) => y.items).length, 1)
+assert.equal(spotvista.note, undefined)
+assert.equal(sections[1].heading, "Preprint")
+assert.equal(sections[1].years.flatMap((y) => y.items).length, 1)
 
 // Accepted @article + international -> International Journal section. The PAPER
 // button (html/url/doi) and the ARXIV button are independent: no publisher link
@@ -115,7 +129,7 @@ assert.equal(shuntserve.venue, "Future Generation Computer Systems (FGCS)")
 assert.equal(shuntserve.link, undefined)
 assert.equal(shuntserve.arxivLink, "https://arxiv.org/abs/2606.18600")
 assert.equal(shuntserve.note, "To appear")
-assert.equal(sections[1].heading, "International Journal")
+assert.equal(sections[2].heading, "International Journal")
 assert.equal(counts.internationalJournal, 1)
 
 // Section grouping: no empty sections, year-descending inside each.
@@ -149,11 +163,11 @@ assert.ok(
   cvOf("jeong2026shuntserve").sub.endsWith("Future Generation Computer Systems (FGCS) (To appear)"),
 )
 
-// Under-review preprints appear on the site but stay out of the CV list.
+// Preprints appear on the site but stay out of the CV list.
 assert.equal(cv.items.length, counts.total)
 assert.ok(!cv.items.some((item) => item.title === spotvista.title))
 
 console.log(
-  `OK: ${counts.total} publications (${counts.summary}) + ${counts.preprints} under review`,
+  `OK: ${counts.total} publications (${counts.summary}) + ${counts.preprints} preprint${counts.preprints === 1 ? "" : "s"}`,
 )
 console.log(`Sections: ${sections.map((s) => `${s.heading} [${s.years.flatMap((y) => y.items).length}]`).join(", ")}`)

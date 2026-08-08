@@ -26,10 +26,9 @@ lands in, the counts header, and the CV publication list are all derived at runt
 on save).
 
 - Type: `@inproceedings` for conferences, `@article` for journals, `@misc` +
-  `keywords={preprint}` + `arxiv={2606.18600}` + `note={Under review}` for under-review
-  preprints (rendered in an "Under Review" section first, linked to arXiv, and NOT
-  counted in the publications total nor listed in the CV publication list; move to
-  `@inproceedings`/`@article` on acceptance).
+  `keywords={preprint}` + `arxiv={2606.18600}` for preprints (rendered in a "Preprint"
+  section first, linked to arXiv, and NOT counted in the publications total nor listed
+  in the CV publication list; move to `@inproceedings`/`@article` on acceptance).
 - Citation key convention: `{lastname}{year}{shortname}`, e.g. `song2026mcptool`.
 - `keywords={international}` or `keywords={domestic}` is REQUIRED — it decides the
   section (type × scope, e.g. `@inproceedings` + `international` → "International
@@ -38,6 +37,9 @@ on save).
 - Equal contribution: append `*` to each equal author's LAST name in the bib
   (`Song*, Moohyun`); it renders as a trailing `*` on the displayed name.
 - Award badge: add `award={Best Paper Award}` to show a ★ badge on the entry.
+- Selected publications: `selected={1}` (rank; lower shows first within a year) puts a
+  copy of the entry in a "Selected" section rendered above all other sections; the
+  entry still appears in its regular section.
 - Paper/presentation type: Oral + Full Paper is the assumed default and gets NO badge.
   Mark only the exceptions with `category={Poster}` or `category={Short Paper}`
   (comma-separate if both apply). Each value renders as a gray badge and the set is

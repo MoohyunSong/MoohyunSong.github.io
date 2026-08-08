@@ -33,6 +33,8 @@ export interface Publication {
   award?: string
   /** From the custom `category` bib field, comma-separated: "Full Paper", "Short Paper", "Oral", "Poster", ... */
   categories?: string[]
+  /** Rank from the custom `selected` bib field; entries with one are duplicated into a "Selected" section (lower = first). */
+  selected?: number
   /** Publisher link for the PAPER button: html > url > doi. */
   link?: string
   /** arXiv abs link for the ARXIV button, present whenever the entry has `arxiv`. */
@@ -47,7 +49,7 @@ export interface PubCounts {
   internationalConference: number
   domesticJournal: number
   domesticConference: number
-  /** Under-review preprints; NOT included in `total` or `summary`. */
+  /** Preprints; NOT included in `total` or `summary`. */
   preprints: number
   total: number
   /** e.g. "5 international conferences, 1 domestic journal, 5 domestic conferences" */
@@ -61,8 +63,6 @@ export interface YearGroup {
 
 export interface PubSection {
   heading: string
-  scope: Scope
-  kind: Kind
   years: YearGroup[]
 }
 
@@ -273,6 +273,7 @@ export function toPublications(entries: BibEntry[]): Publication[] {
       categories: f.category
         ? f.category.split(",").map((c) => c.trim()).filter(Boolean)
         : undefined,
+      selected: f.selected ? Number(f.selected) : undefined,
       link: f.html ?? f.url ?? (f.doi ? `https://doi.org/${f.doi}` : undefined),
       arxivLink: f.arxiv ? `https://arxiv.org/abs/${f.arxiv}` : undefined,
       scope,
@@ -314,25 +315,31 @@ function groupByYear(pubs: Publication[]): YearGroup[] {
 
 export function groupSections(pubs: Publication[]): PubSection[] {
   const order: Array<[string, Scope, Kind]> = [
-    ["Under Review", "preprint", "preprint"],
+    ["Preprint", "preprint", "preprint"],
     ["International Journal", "international", "journal"],
     ["International Conference", "international", "conference"],
     ["Domestic Journal", "domestic", "journal"],
     ["Domestic Conference", "domestic", "conference"],
   ]
-  return order
+  const sections = order
     .map(([heading, scope, kind]) => ({
       heading,
-      scope,
-      kind,
       years: groupByYear(pubs.filter((p) => p.scope === scope && p.kind === kind)),
     }))
     .filter((section) => section.years.length > 0)
+  // Curated highlights, duplicated from their regular sections: newest year
+  // first, `selected` rank order within a year.
+  const selected = pubs
+    .filter((p) => p.selected !== undefined)
+    .sort((a, b) => Number(b.year) - Number(a.year) || a.selected! - b.selected!)
+  if (selected.length > 0)
+    sections.unshift({ heading: "Selected", years: groupByYear(selected) })
+  return sections
 }
 
 /**
  * The auto-generated "Publications" section of the CV, one item per published
- * paper (under-review preprints stay out of the CV, like the counts).
+ * paper (preprints stay out of the CV, like the counts).
  * `owner` is the site owner's display name ("Moohyun Song"); when given, its
  * abbreviated form is attached as `highlight` for emphasis in the author list.
  */
