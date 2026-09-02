@@ -176,6 +176,12 @@ export const CV_SECTIONS: CvSection[] = [
     heading: "Grants & Funding",
     items: [
       {
+        date: "Sep. 2026",
+        title: "Master's Student Research Fellowship",
+        sub: "National Research Foundation of Korea, Ministry of Education · KRW 12M",
+        note: "Selected as Principal Investigator for a competitive national research grant that funds graduate students to independently propose and lead their own research. Project: Multi-Objective Optimization Scheduling of LLM Tools for Distributed Edge-Cloud Agent Systems.",
+      },
+      {
         date: "May 2026",
         title: "CCGrid 2026 Student Travel Grant",
         sub: "26th IEEE International Symposium on Cluster, Cloud and Internet Computing · AUD $1,500",

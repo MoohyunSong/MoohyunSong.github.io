@@ -67,10 +67,10 @@ assert.equal(mlpipeline.authors[0], "Moohyun Song†")
 assert.equal(mlpipeline.authors[1], "Seungwoo Jeong")
 assert.equal(byKey("song2025costnorm").authors.at(-1), "Jangho Kim†")
 
-// Entries without html/url/doi get no link; note carries "To appear".
+// Published in the IEEE CLOUD 2026 proceedings: linked, no "To appear" note.
 const ddd = byKey("kim2026ddd")
-assert.equal(ddd.link, undefined)
-assert.equal(ddd.note, "To appear")
+assert.equal(ddd.link, "https://ieeexplore.ieee.org/document/11662455")
+assert.equal(ddd.note, undefined)
 // Series must not double an existing "(CLOUD)" abbreviation in the venue.
 assert.ok(!ddd.venue.includes("(CLOUD) ("), `unexpected venue: ${ddd.venue}`)
 assert.equal(
@@ -127,15 +127,15 @@ assert.equal(sections[0].heading, "Preprint")
 assert.equal(sections[0].years.flatMap((y) => y.items).length, 1)
 
 // Accepted @article + international -> International Journal section. The PAPER
-// button (html/url/doi) and the ARXIV button are independent: no publisher link
-// yet, but the arXiv one stays.
+// button (html/url/doi) and the ARXIV button are independent: published entries
+// show both side by side.
 const shuntserve = byKey("jeong2026shuntserve")
 assert.equal(shuntserve.kind, "journal")
 assert.equal(shuntserve.scope, "international")
 assert.equal(shuntserve.venue, "Future Generation Computer Systems (FGCS)")
-assert.equal(shuntserve.link, undefined)
+assert.equal(shuntserve.link, "https://doi.org/10.1016/j.future.2026.108760")
 assert.equal(shuntserve.arxivLink, "https://arxiv.org/abs/2606.18600")
-assert.equal(shuntserve.note, "To appear")
+assert.equal(shuntserve.note, undefined)
 assert.equal(sections[1].heading, "International Journal")
 assert.equal(counts.internationalJournal, 1)
 
